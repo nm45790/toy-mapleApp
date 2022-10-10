@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- 1. 이후 jquery 걷어내기 -->
+<!-- 2. 효과 별로인 것 같으면 없애기 -->
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+	jQuery(function($) {
+	    $("body").css("display", "none");
+	    $("body").fadeIn(2000);
+	    $("a.transition").click(function(event){
+	        event.preventDefault();
+	        linkLocation = this.href;
+	        $("body").fadeOut(1000, redirectPage);
+	    });
+	    function redirectPage() {
+	    window.location = linkLocation;
+	    }
+	});
+</script>
+<!-- 1. 이후 jquery 걷어내기 -->
+<!-- 2. 효과 별로인 것 같으면 없애기 -->
+
+<head>
+    <title>Hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <style>
+		.characterInfo {
+					 grid-template-columns: repeat(5, minmax(230px, auto));
+					 grid-template-rows:  minmax(400px, auto);
+					 display:grid;
+				   }
+		.characterInfoItem{ margin-bottom:30px; }
+		.characterDetailInfo { margin-top:30px; }
+
+    </style>
+</head>
+<body>
+
+    <div class="characterInfo">
+        <div th:each="info : ${characterInfo}">
+            <div class="characterInfoItem">
+
+                <td th:inline="text">
+                    <p th:if="${info.getChk() == 'y'}">
+                        <img th:src='${info.getImg()}' /><br/>
+                    </p>
+
+                    <p th:unless="${info.getChk() == 'y'}">
+                        <img src=/image/x.png width=180px height=180px /> <br/>
+                    </p>
+
+                    <p>[[${'존재여부 : ' + info.getChk()}]] <br/> </p>
+                    <p>[[${'아이디 : ' + info.getId()}]] <br/>    </p>
+                    <p>[[${'레벨 : ' + info.getLv()}]] <br/>     </p>
+                    <p>[[${'직업 : ' + info.getJob()}]] <br/>    </p>
+                    <p>[[${'경험치 : ' + info.getExp()}]] <br/>    </p>
+                    <p>[[${'인기도 : ' + info.getFamous()}]] <br/> </p>
+                    <p>[[${'길드 : ' + info.getGuild()}]] <br/>   </p>
+                    <p>[[${'메소 : ' + info.getMapleMoney()}]] <br/> </p>
+                </td>
+            </div>
+        </div>
+    </div>
+
+    <div class="characterDetailInfo">
+        <div>
+            <p> 검색 캐릭터 수 : [[${characterInfoSize}]] <br/> </p>
+            <p> 캐릭터 인벤토리 총 메소 : [[${characterTotalMoney}]] <br/> </p>
+            <!--
+            <p> [[${storageMoney}]] <br/><br/> </p>
+            -->
+        </div>
+
+    </div>
+
+    <script>
+        console.log("hi~");
+    </script>
+</body>
+
+</html>
