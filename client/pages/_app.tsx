@@ -1,16 +1,19 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-import Head from 'next/head'
+import "../styles/globals.css";
+import Layout from "../components/Layout";
+import Head from "next/head";
+import type { AppProps } from "next/app";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return ( 
+  return (
     <>
-    <Head>
-      <title>Maple Toy App</title>
-    </Head>
-  <Component {...pageProps} />
-  </>
+      <Head>
+        <title>toyNextjs</title>
+      </Head>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </>
   );
 }
 
-export default MyApp
+export default MyApp;
