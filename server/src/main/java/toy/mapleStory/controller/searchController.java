@@ -54,7 +54,7 @@ public class searchController {
         return "/search";
     }
 
-    @PostMapping(value="/searchInfo.do")
+    @PostMapping(value="/searchInfo")
     public String searchInfo(Model model, @RequestParam("showId") String id) throws InterruptedException {
 
         System.out.println("요청 도착");
