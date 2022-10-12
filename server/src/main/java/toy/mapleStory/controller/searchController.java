@@ -19,7 +19,7 @@ public class searchController {
     @Autowired
     private searchInfoService searchService;
 
-    @GetMapping(value="/test.do")
+    @GetMapping(value="/test")
     public String test(HttpServletRequest request, Locale locale, Model model){
         String browser 	 = "";
         String userAgent = request.getHeader("User-Agent");
@@ -47,14 +47,14 @@ public class searchController {
     }
 
 
-    @GetMapping(value="/search.do")
+    @GetMapping(value="/search")
     public String search(Model model){
         model.addAttribute("data", "hi~~");
 
         return "/search";
     }
 
-    @PostMapping(value="/searchInfo.do")
+    @PostMapping(value="/searchInfo")
     public String searchInfo(Model model, @RequestParam("showId") String id) throws InterruptedException {
 
         System.out.println("요청 도착");
