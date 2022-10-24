@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 const Home: NextPage = () => {
   return (
     <>
-      <div className="bg-color-1 min-h-screen ">
+      <div className="bg-color-2 min-h-screen ">
         
       </div>
     </>
