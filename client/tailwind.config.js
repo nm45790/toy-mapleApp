@@ -12,6 +12,12 @@ module.exports = {
         "color-3": "#AEBDCA",
         "color-4": "#7895B2",
       },
+      screens: {
+        mobile: '481px',
+        tablet: '769px',
+        laptop: '1025px',
+        desktop: '1281px',
+      },
     },
   },
   plugins: [],

@@ -9,7 +9,7 @@ export default function SideBar() {
   return (
     <div className="w-80 pt-56 h-full shadow-md bg-color-1 px-1 fixed">
       <ul className="relative">
-        {/* <li className="relative">
+        <li className="relative">
           <span
             onClick={() => {
               setSidebar(false);
@@ -18,7 +18,7 @@ export default function SideBar() {
           >
             &larr;
           </span>
-        </li> */}
+        </li>
         <Link href="/">
           <li className="relative">
             <a
