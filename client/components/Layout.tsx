@@ -9,7 +9,7 @@ type ChildernProps = {
 export default function Layout({ children }: ChildernProps) {
   return (
     <>
-      <SideBar />
+      {/* <SideBar /> */}
       <NavBar />
       <div>{children}</div>
     </>
