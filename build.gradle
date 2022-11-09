@@ -21,6 +21,12 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.jsoup:jsoup:1.15.3'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	/* spring-boot-devtools 스프링 빌드 자동화 위해 의존성 추가 */
+	implementation 'org.springframework.boot:spring-boot-devtools:2.7.5'
+
+	/* json */
+	implementation 'org.json:json:20220924'
 }
 
 tasks.named('test') {

@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import toy.mapleStory.service.searchInfoService;
 import toy.mapleStory.vo.searchVO;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Locale;
 
 @Controller
 public class searchController {
@@ -19,39 +17,11 @@ public class searchController {
     @Autowired
     private searchInfoService searchService;
 
-    @GetMapping(value="/test")
-    public String test(HttpServletRequest request, Locale locale, Model model){
-        String browser 	 = "";
-        String userAgent = request.getHeader("User-Agent");
-
-        if(userAgent.indexOf("Trident") > -1) {												// IE
-            browser = "ie";
-        } else if(userAgent.indexOf("Edge") > -1) {											// Edge
-            browser = "edge";
-        } else if(userAgent.indexOf("Whale") > -1) { 										// Naver Whale
-            browser = "whale";
-        } else if(userAgent.indexOf("Opera") > -1 || userAgent.indexOf("OPR") > -1) { 		// Opera
-            browser = "opera";
-        } else if(userAgent.indexOf("Firefox") > -1) { 										 // Firefox
-            browser = "firefox";
-        } else if(userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") == -1 ) {	 // Safari
-            browser = "safari";
-        } else if(userAgent.indexOf("Chrome") > -1) {										 // Chrome
-            browser = "chrome";
-        }
-
-        System.out.println("User-Agent : " + userAgent);
-        System.out.println("Browser : " + browser);
-
-        return "/index";
-    }
-
-
     @GetMapping(value="/search")
     public String search(Model model){
         model.addAttribute("data", "hi~~");
 
-        return "/search";
+        return "/index";
     }
 
     @PostMapping(value="/searchInfo")
@@ -83,4 +53,7 @@ public class searchController {
 
         return "/searchInfo";
     }
+
+
+
 }
