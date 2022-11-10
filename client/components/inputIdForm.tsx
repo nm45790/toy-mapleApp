@@ -1,5 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { inputCharState } from "../state/inputCharState";
 
 type Inputs = {
   name: string;
@@ -9,8 +11,8 @@ type IDetailInfo = {
   name: string;
 };
 
-export default function EnterIdForm() {
-  const [charArr, setCharArr] = useState<IDetailInfo[]>([]);
+export default function InputIdForm() {
+  const [chars, setChars] = useRecoilState(inputCharState);
   let arr: IDetailInfo[] = [];
   const {
     register,
@@ -21,9 +23,9 @@ export default function EnterIdForm() {
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     arr.push(data);
-    console.log(arr);
+    // console.log(arr);
     setValue("name", "");
-    setCharArr((charArr) => [...charArr, ...arr]);
+    setChars((chars) => [...chars, ...arr]);
   };
   //   console.log(watch("name"));
   return (
@@ -46,9 +48,7 @@ export default function EnterIdForm() {
                 },
               })}
             />
-            {errors.name?.type === "required" && (
-              <span>This field is required</span>
-            )}
+            {errors.name?.type === "required" && <span>입력 해주세요</span>}
             {errors.name?.type === "minLength" && <span>It's too short</span>}
             {errors.name?.type === "maxLength" && <span>It's too long</span>}
             <input
@@ -59,10 +59,10 @@ export default function EnterIdForm() {
           </form>
         </div>
         <div className="h-64 w-64 border-solid border-2 border-color-4 rounded-lg">
-          {charArr.length === 0 ? (
+          {chars.length === 0 ? (
             <p>캐릭터를 추가해주세요</p>
           ) : (
-            charArr.map((v, i) => <p key={i}>{v.name}</p>)
+            chars.map((v, i) => <p key={i}>{v.name}</p>)
           )}
         </div>
       </div>
