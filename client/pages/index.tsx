@@ -3,6 +3,7 @@ import Seo from "../components/Seo";
 import { inputCharState } from "../state/inputCharState";
 import { useRecoilState } from "recoil";
 import InputIdForm from "../components/inputIdForm";
+import CharCards from "../components/charCards";
 
 const Home: NextPage = () => {
   const [chars, setChars] = useRecoilState(inputCharState);
@@ -14,7 +15,7 @@ const Home: NextPage = () => {
       <button className="mt-10 bg-color-3 hover:bg-color-4 text-color-2 font-bold py-2 px-4 rounded-full">
         검색
       </button>
-      {chars&& chars.map(((v,i)=><div key={i}></div>)) }
+      <CharCards/>
     </>
   );
 };
