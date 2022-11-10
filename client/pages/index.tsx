@@ -18,6 +18,7 @@ const Home: NextPage = () => {
       >
         초기화
       </button>
+      <CharCards/>
     </>
   );
 };
