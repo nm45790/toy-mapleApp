@@ -30,7 +30,23 @@ export default function Mordal() {
                   </button>
                 </div>
                 {/*body*/}
-                <div className="relative p-6 flex-auto grid grid-cols-4 gap-4">
+                <div className="relative p-6 flex-auto grid lg:grid-cols-12 md:grid-cols-8 grid-cols-4 gap-4">
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
                   <div className="shadow-lg p-6 bg-slate-400"></div>
                   <div className="shadow-lg p-6 bg-slate-400"></div>
                   <div className="shadow-lg p-6 bg-slate-400"></div>
