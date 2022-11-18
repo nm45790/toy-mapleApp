@@ -74,19 +74,21 @@ public class jsonController {
 //
 //        return json.toString();
         List<JSONObject> json = new ArrayList<JSONObject>();
-        JSONObject i = new JSONObject();
-        JSONObject j = new JSONObject();
+        List<JSONObject> arr = new ArrayList<JSONObject>();
+        List<String> listStr = new ArrayList<String>();
+        listStr.add("lee");
+        listStr.add("myung");
+        listStr.add("zoo");
 
-        i.put("1", "b");
-        i.put("2", "d");
-        i.put("3", "f");
+        JSONObject name = new JSONObject();
+        JSONObject family = new JSONObject();
 
-        j.put("4", "b");
-        j.put("5", "d");
-        j.put("6", "f");
+        name.put("name", listStr);
 
-        json.add(i);
-        json.add(j);
+        family.put("family", "sy");
+
+        json.add(name);
+        json.add(family);
 
         System.out.println(json);
 
