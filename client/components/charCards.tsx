@@ -10,34 +10,57 @@ export default function CharCards() {
   const [chars, setChars] = useRecoilState(inputCharState);
   const updatedChars = [...chars];
 
-  const [lvData, setLvData] = React.useState();
-  const [guildData, setGuildData] = React.useState();
-  const [mesoData, setMesoData] = React.useState();
-  const [jobData, setJobData] = React.useState();
+  const [datas, setDatas] = React.useState([]);
+  const [imgData, setImgData] = React.useState([]);
+  const [cashData, setCashData] = React.useState([]);
+  const [lvData, setLvData] = React.useState([]);
+  const [guildData, setGuildData] = React.useState([]);
+  const [mesoData, setMesoData] = React.useState([]);
+  const [jobData, setJobData] = React.useState([]);
 
-
-  let charsStr = "";
-  chars.map((v) => (charsStr += v.name + ","));
-  React.useEffect(() => {
-      axios
-        .get("명회.json")
-        .then(function (response) {
-          setLvData(response.data.lv);
-          setGuildData(response.data.guild)
-          setMesoData(response.data.mapleMoney)
-          setJobData(response.data.job)
-          console.log("성공");
-        })
-        .catch(function (error) {
-          console.log(error);
-          console.log("실패");
-        });
-  }, []);
+  const searchApi = () => {
+    // chars&&chars.map((v)=>{
+    // axios
+    //   .get(`${v.name}.json`)
+    //   .then((response) => {
+    //     setDatas(response.data);
+    //     setLvData(response.data.lv);
+    //     setCashData(response.data.cash);
+    //     setImgData(response.data.img);
+    //     setGuildData(response.data.guild);
+    //     setMesoData(response.data.mapleMoney);
+    //     setJobData(response.data.job);
+    //     console.log("성공");
+    //     console.log(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     console.log("실패");
+    //   });
+    // })
+    axios
+      .all(chars.map((v) => axios.get(`${v.name}.json`)))
+      .then((response) => {
+        console.log(response.map((v) => v.data));
+        console.log(response.map(v=>v.data.job));
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log("실패");
+      });
+  };
   return (
     <>
+      <button
+        onClick={searchApi}
+        className="mt-10 bg-color-3 hover:bg-color-4 text-color-2 font-bold py-2 px-4 rounded-full"
+      >
+        조회
+      </button>
       <Mordal />
+      {/* {cashData&&Object.keys(cashData)} */}
       <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4">
-        { chars &&
+        {chars &&
           chars.map((v, i) => (
             <div key={"charcards" + i}>
               <button
@@ -51,6 +74,7 @@ export default function CharCards() {
               </button>
               <button
                 onClick={() => {
+                  console.log(cashData);
                 }}
                 className="mt-10 bg-color-3 hover:bg-color-4 text-color-2 font-bold py-2 px-4 rounded-full"
               >
@@ -60,7 +84,7 @@ export default function CharCards() {
                 <div className="px-6 py-4">
                   <div className="font-bold text-xl mb-2">{v.name}</div>
                   <p className="text-gray-700 text-base"> </p>
-                  <Image src={Manikin} placeholder="blur" />
+                  <Image src={Manikin} />
                   <p>레벨 : {lvData} </p>
                   <p>직업 : {jobData} </p>
                   <p>길드 : {guildData} </p>

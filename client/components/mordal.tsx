@@ -6,7 +6,6 @@ export default function Mordal() {
     <>
       <button
         className="bg-color-3 hover:bg-color-4 text-color-2 font-bold py-2 px-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-        type="button"
         onClick={() => setShowModal(true)}
       >
         모달 테스트
