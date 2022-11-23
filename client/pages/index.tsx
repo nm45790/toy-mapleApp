@@ -11,21 +11,21 @@ const Home: NextPage = () => {
   let charsStr="";
   chars.map(v=>charsStr+=v.name+",")
 
-  const searchApi = () => {
-        const url = "http://localhost:8080/api/searchInfo";
-        const id = charsStr
-        console.log(url);
-        console.log("id:" , id);
-        axios.get(url, {params:{ "id": id }})
-        .then(function(response) {
-            console.log(response.data);
-            console.log("성공");
-        })
-        .catch(function(error) {
-            console.log(error);
-            console.log("실패");
-        })
-  }
+  // const searchApi = () => {
+  //       const url = "http://localhost:8080/api/searchInfo";
+  //       const id = charsStr
+  //       console.log(url);
+  //       console.log("id:" , id);
+  //       axios.get(url, {params:{ "id": id }})
+  //       .then(function(response) {
+  //           console.log(response.data);
+  //           console.log("성공");
+  //       })
+  //       .catch(function(error) {
+  //           console.log(error);
+  //           console.log("실패");
+  //       })
+  // }
 
   return (
     <>
@@ -37,11 +37,7 @@ const Home: NextPage = () => {
             className="mt-10 bg-color-3 hover:bg-color-4 text-color-2 font-bold py-2 px-4 rounded-full">
             초기화
       </button>
-      <button
-            onClick={searchApi}
-            className="mt-10 bg-color-3 hover:bg-color-4 text-color-2 font-bold py-2 px-4 rounded-full">
-            조회
-      </button>
+
       <CharCards/>
     </>
   );

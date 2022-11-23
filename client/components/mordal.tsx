@@ -6,7 +6,6 @@ export default function Mordal() {
     <>
       <button
         className="bg-color-3 hover:bg-color-4 text-color-2 font-bold py-2 px-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-        type="button"
         onClick={() => setShowModal(true)}
       >
         모달 테스트
@@ -30,7 +29,23 @@ export default function Mordal() {
                   </button>
                 </div>
                 {/*body*/}
-                <div className="relative p-6 flex-auto grid grid-cols-4 gap-4">
+                <div className="relative p-6 flex-auto grid lg:grid-cols-12 md:grid-cols-8 grid-cols-4 gap-4">
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
+                  <div className="shadow-lg p-6 bg-slate-400"></div>
                   <div className="shadow-lg p-6 bg-slate-400"></div>
                   <div className="shadow-lg p-6 bg-slate-400"></div>
                   <div className="shadow-lg p-6 bg-slate-400"></div>
