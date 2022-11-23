@@ -6,6 +6,12 @@ import axios from "axios";
 import React from "react";
 import Mordal from "./mordal";
 
+interface Chars {
+  data : [];
+  lv : number;
+  job : string;
+}
+
 export default function CharCards() {
   const [chars, setChars] = useRecoilState(inputCharState);
   const updatedChars = [...chars];
@@ -16,33 +22,15 @@ export default function CharCards() {
   const [lvData, setLvData] = React.useState([]);
   const [guildData, setGuildData] = React.useState([]);
   const [mesoData, setMesoData] = React.useState([]);
-  const [jobData, setJobData] = React.useState([]);
+  const [jobData, setJobData] = React.useState<Chars[]>([]);
 
   const searchApi = () => {
-    // chars&&chars.map((v)=>{
-    // axios
-    //   .get(`${v.name}.json`)
-    //   .then((response) => {
-    //     setDatas(response.data);
-    //     setLvData(response.data.lv);
-    //     setCashData(response.data.cash);
-    //     setImgData(response.data.img);
-    //     setGuildData(response.data.guild);
-    //     setMesoData(response.data.mapleMoney);
-    //     setJobData(response.data.job);
-    //     console.log("성공");
-    //     console.log(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     console.log("실패");
-    //   });
-    // })
     axios
       .all(chars.map((v) => axios.get(`${v.name}.json`)))
-      .then((response) => {
-        console.log(response.map((v) => v.data));
-        console.log(response.map(v=>v.data.job));
+      .then(response => {
+        setJobData(response.map((v)=>v.data.job))
+        //타입스크립트 never 타입 오류 'any' 형식은 'never' 형식에 할당할 수 없습니다.
+        console.log(jobData);
       })
       .catch((error) => {
         console.log(error);
@@ -72,21 +60,21 @@ export default function CharCards() {
               >
                 삭제
               </button>
-              <button
+              {/* <button
                 onClick={() => {
                   console.log(cashData);
                 }}
                 className="mt-10 bg-color-3 hover:bg-color-4 text-color-2 font-bold py-2 px-4 rounded-full"
               >
                 조회
-              </button>
+              </button> */}
               <div className="max-w-sm rounded overflow-hidden shadow-lg bg-color-3 mt-2 ">
                 <div className="px-6 py-4">
                   <div className="font-bold text-xl mb-2">{v.name}</div>
                   <p className="text-gray-700 text-base"> </p>
                   <Image src={Manikin} />
                   <p>레벨 : {lvData} </p>
-                  <p>직업 : {jobData} </p>
+                  <p>직업 : {jobData[i]} </p>
                   <p>길드 : {guildData} </p>
                   <p>보유메소 : {mesoData}</p>
                 </div>
