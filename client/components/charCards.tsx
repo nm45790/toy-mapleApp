@@ -6,9 +6,12 @@ import axios from "axios";
 import React from "react";
 import Mordal from "./mordal";
 
-interface Chars {
-  data : [];
+interface CharsInterface {
   lv : number;
+  job : string;
+}
+
+type JonType =  {
   job : string;
 }
 
@@ -17,20 +20,21 @@ export default function CharCards() {
   const updatedChars = [...chars];
 
   const [datas, setDatas] = React.useState([]);
-  const [imgData, setImgData] = React.useState([]);
-  const [cashData, setCashData] = React.useState([]);
-  const [lvData, setLvData] = React.useState([]);
-  const [guildData, setGuildData] = React.useState([]);
-  const [mesoData, setMesoData] = React.useState([]);
-  const [jobData, setJobData] = React.useState<Chars[]>([]);
+  const [guildData, setGuildData] = React.useState<string[]>([]);
+  const [mesoData, setMesoData] = React.useState<number[]>([]);
+  const [lvData, setLvData] = React.useState<number[]>([]);
+  const [jobData, setJobData] = React.useState<string[]>([]);
 
   const searchApi = () => {
     axios
       .all(chars.map((v) => axios.get(`${v.name}.json`)))
+      //서버에 요청할때 : axios.get(`localhost8080/api/blabla/${v.name}`)
       .then(response => {
-        setJobData(response.map((v)=>v.data.job))
-        //타입스크립트 never 타입 오류 'any' 형식은 'never' 형식에 할당할 수 없습니다.
-        console.log(jobData);
+        console.log("성공");
+        setMesoData(response.map(v=>v.data.mapleMoney))
+        setGuildData(response.map(v=>v.data.guild))
+        setJobData(response.map(v=>v.data.job))
+        setLvData(response.map(v=>v.data.lv))
       })
       .catch((error) => {
         console.log(error);
@@ -46,7 +50,6 @@ export default function CharCards() {
         조회
       </button>
       <Mordal />
-      {/* {cashData&&Object.keys(cashData)} */}
       <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4">
         {chars &&
           chars.map((v, i) => (
@@ -73,10 +76,11 @@ export default function CharCards() {
                   <div className="font-bold text-xl mb-2">{v.name}</div>
                   <p className="text-gray-700 text-base"> </p>
                   <Image src={Manikin} />
-                  <p>레벨 : {lvData} </p>
+                  {/* 이미지 데이터 바꿔야함 */}
+                  <p>레벨 : {lvData[i]} </p>
                   <p>직업 : {jobData[i]} </p>
-                  <p>길드 : {guildData} </p>
-                  <p>보유메소 : {mesoData}</p>
+                  <p>길드 : {guildData[i]} </p>
+                  <p>보유메소 : {mesoData[i]}</p>
                 </div>
                 {/* <div className="px-6 pt-4 pb-2">
                   <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
@@ -90,14 +94,6 @@ export default function CharCards() {
                   </span>
                 </div> */}
               </div>
-              {/* <div className="w-full h-64 mt-2 border-solid border-2 border-color-4 rounded-lg p-8">
-                <p>{v.name}</p>
-                <Image src={Manikin} placeholder="blur"/>
-                <p>레벨 : 257(불,독)</p>
-                <p>길드 : Free</p>
-                <p>보유메소 : $991,567,123,161</p>
-                <p>보유젬스톤 : 5,369개</p>
-              </div> */}
             </div>
           ))}
       </div>
