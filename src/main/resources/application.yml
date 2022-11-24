@@ -1,0 +1,30 @@
+
+server:
+  tomcat:
+    threads:
+      max: 3
+      min-space: 3
+    accept-count: 100
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521/orcl
+    username: mhor
+    password: 1234
+  thymeleaf:
+    cache: false
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+mybatis:
+  mapper-locations: mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+  type-aliases-package: toy.mapleStory
+
+logging:
+  level:
+    toy.mapleStory.mapper: TRACE

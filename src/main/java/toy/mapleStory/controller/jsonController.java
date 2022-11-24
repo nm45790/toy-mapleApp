@@ -1,17 +1,25 @@
 package toy.mapleStory.controller;
 
-import org.json.JSONObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import toy.mapleStory.service.searchInfoService;
+import toy.mapleStory.vo.checkVO;
 import toy.mapleStory.vo.searchVO;
+import toy.mapleStory.service.searchMapper;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.util.*;
 
 @CrossOrigin(origins="*", allowedHeaders="*") /* CORS 어노테이션 */
 @RestController
@@ -20,79 +28,106 @@ public class jsonController {
     @Autowired
     private searchInfoService searchService;
 
-    @GetMapping(value="/callApi")
-    public String frontCallApi(){
-        System.out.println("!!");
-        List<JSONObject> json = new ArrayList<JSONObject>();
-        JSONObject i = new JSONObject();
-        JSONObject j = new JSONObject();
+    @Autowired
+    searchMapper searchMapper;
 
-        i.put("1", "b");
-        i.put("2", "d");
-        i.put("3", "f");
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-        j.put("4", "b");
-        j.put("5", "d");
-        j.put("6", "f");
+    @GetMapping("/api/addQueue")
+    public String addQueue(@RequestParam(value = "id", required = false) String id) throws IOException, InterruptedException{
 
-        json.add(i);
-        json.add(j);
+        System.out.println(id);
+        Thread.sleep(3000);
 
-        System.out.println(json);
-
-        return json.toString();
+        String newId = id+":";
+        return newId;
     }
 
     @GetMapping("/api/searchInfo")
-    public String searchInfo(@RequestParam(value="id", required=false) String id) throws InterruptedException {
+    public String searchInfo(@RequestParam(value="id", required=false) String id) throws IOException, InterruptedException, ParseException {
+        System.out.println(id + "요청 도착");
 
-        System.out.println("요청 도착");
-        System.out.println(id);
+        JSONObject j = new JSONObject();
+        ObjectMapper mapper = new ObjectMapper();
+        int cnt = searchMapper.checkId(id);
 
-//        // 검색 캐릭터 이름, 직업, 레벨, 경험치, 인기도, 길드 정보
-//        List<searchVO> characterInfo = searchService.infoList(id);
-//
-//        // 검색 캐릭터 메소, 인벤토리 / 창고 링크
-//        searchService.subInfoList(characterInfo);
-//
-//        // 검색 캐릭터 메소 합
-//        Long totalMoney = searchService.calcTotalMoney(characterInfo);
-////
-////        검색 캐릭터 인벤토리
-//        List<Map> itemMapList = searchService.itemInfoList(characterInfo);
-////
-////      검색 캐릭터 창고 메소
-//        String storageMoney = searchService.getStorageMoney(characterInfo);
-//
-//        JSONObject json = new JSONObject();
-//        json.put("characterInfo", characterInfo);
-//        json.put("characterTotalMoney", totalMoney);
-//        json.put("itemMapList", itemMapList);
-//        json.put("storageMoney", storageMoney);
-//
-//        System.out.println(json);
-//
-//        return json.toString();
-        List<JSONObject> json = new ArrayList<JSONObject>();
-        List<JSONObject> arr = new ArrayList<JSONObject>();
-        List<String> listStr = new ArrayList<String>();
-        listStr.add("lee");
-        listStr.add("myung");
-        listStr.add("zoo");
+        System.out.println("idCheck");
+        System.out.println(id + " ---> " + cnt);
 
-        JSONObject name = new JSONObject();
-        JSONObject family = new JSONObject();
+        if (cnt == 1){
+            String filePath = "data/"+id+".json";
+            Reader reader = new FileReader(filePath);
 
-        name.put("name", listStr);
+            JSONParser parser = new JSONParser();
+            j = (JSONObject) parser.parse(reader);
+            System.out.println(j);
+        }
+        else if (cnt == 0){ // &
+            /* insert new id info -> id, chkState=1 */
+            checkVO checkVO = new checkVO();
+            checkVO.setName(id);
+            checkVO.setChk(1);
+            searchMapper.insertData(checkVO);
 
-        family.put("family", "sy");
+            // 검색 캐릭터 이름, 직업, 레벨, 경험치, 인기도, 길드 정보
+            searchVO characterInfo = searchService._infoList(id);
+            Thread.sleep(2000);
 
-        json.add(name);
-        json.add(family);
+            // 검색 캐릭터 메소, 인벤토리 / 창고 링크
+            searchService._subInfoList(characterInfo);
+            Thread.sleep(2000);
 
-        System.out.println(json);
+            if (characterInfo.getChk().equals("n")){
+                j.put("characterInfo", "-");
+                j.put("totalMoney", "-");
+                j.put("itemMapList", "-");
+                j.put("storageMoney", "-");
+            }
+            else if(characterInfo.getChk().equals("y")){
+                // 검색 캐릭터 메소 합
+                Long totalMoney = searchService._calcTotalMoney(characterInfo);
+                Thread.sleep(2000);
 
-        return json.toString();
+                // 검색 캐릭터 인벤토리
+                List<JSONObject> itemMapList = searchService._itemInfoList(characterInfo);
+                Thread.sleep(2000);
+
+                // 검색 캐릭터 창고 메소
+                String storageMoney = searchService._getStorageMoney(characterInfo);
+                Thread.sleep(2000);
+
+                j.put("chk", characterInfo.getChk());
+                j.put("img", characterInfo.getImg());
+                j.put("name", characterInfo.getId());
+                j.put("job", characterInfo.getJob());
+                j.put("lv", characterInfo.getLv());
+                j.put("exp", characterInfo.getExp());
+                j.put("fame", characterInfo.getFamous());
+                j.put("guild", characterInfo.getGuild());
+                j.put("mapleMoney", characterInfo.getMapleMoney());
+                j.put("totalMoney", totalMoney.toString());
+                j.put("equip", itemMapList.get(0));
+                j.put("use", itemMapList.get(1));
+                j.put("etc", itemMapList.get(2));
+                j.put("setup", itemMapList.get(3));
+                j.put("cash", itemMapList.get(4));
+                j.put("storageMoney", storageMoney);
+
+                System.out.println(j);
+
+                /* file save */
+                searchService.saveBinFile(id, j);
+                Thread.sleep(2000);
+
+                /* update id info -> chkState = 0 */
+                checkVO.setChk(0);
+                searchMapper.updateData(checkVO);
+            }
+        }
+        System.out.println(id+": ok and wait...");
+//        Thread.sleep(5000);
+
+        return j.toString();
     }
 }
 
