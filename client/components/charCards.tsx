@@ -37,6 +37,7 @@ export default function CharCards() {
       //서버에 요청할때 : axios.get(`localhost8080/api/blabla/${v.name}`)
       .then((response) => {
         console.log("성공");
+        console.log(response);
         setMesoData(response.map((v) => v.data.mapleMoney));
         setGuildData(response.map((v) => v.data.guild));
         setJobData(response.map((v) => v.data.job));
@@ -78,11 +79,14 @@ export default function CharCards() {
                   <div className="font-bold text-xl mb-2 flex justify-between">
                     <p>{v.name}</p>
                     <button onClick={() => setShowModal(true)}>
-                      <MdInventory />
+                      <MdInventory className="hover:fill-slate-500" />
                     </button>
                     {showModal ? (
                       <>
-                        <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                        <div
+                          key={v.name}
+                          className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+                        >
                           <div className="relative w-auto my-6 mx-auto max-w-3xl">
                             {/*content*/}
                             <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
@@ -92,10 +96,10 @@ export default function CharCards() {
                                   인벤토리
                                 </h3>
                                 <button
-                                  className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                                  className="p-1 ml-auto bg-transparent border-0  text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                                   onClick={() => setShowModal(false)}
                                 >
-                                  <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                                  <span className="bg-transparent text-red-500 h-6 w-6 text-2xl block outline-none focus:outline-none">
                                     ×
                                   </span>
                                 </button>
@@ -104,7 +108,7 @@ export default function CharCards() {
                               <div className="relative p-6 flex-auto grid lg:grid-cols-12 md:grid-cols-8 grid-cols-4 gap-4 overflow-auto max-h-[80vh]">
                                 {Object.keys(equipData[i]).map((v) => (
                                   <div
-                                    id={v}
+                                    key={v}
                                     className="shadow-lg p-6 bg-red-50"
                                   >
                                     <p className="text-xs">{v}</p>
@@ -112,7 +116,7 @@ export default function CharCards() {
                                 ))}
                                 {Object.keys(useData[i]).map((v) => (
                                   <div
-                                    id={v}
+                                    key={v}
                                     className="shadow-lg p-6 bg-red-100"
                                   >
                                     <p className="text-xs">{v}</p>
@@ -120,7 +124,7 @@ export default function CharCards() {
                                 ))}
                                 {Object.keys(etcData[i]).map((v) => (
                                   <div
-                                    id={v}
+                                    key={v}
                                     className="shadow-lg p-6 bg-red-200"
                                   >
                                     <p className="text-xs">{v}</p>
@@ -128,7 +132,7 @@ export default function CharCards() {
                                 ))}
                                 {Object.keys(setupData[i]).map((v) => (
                                   <div
-                                    id={v}
+                                    key={v}
                                     className="shadow-lg p-6 bg-red-300"
                                   >
                                     <p className="text-xs">{v}</p>
@@ -136,7 +140,7 @@ export default function CharCards() {
                                 ))}
                                 {Object.keys(cashData[i]).map((v) => (
                                   <div
-                                    id={v}
+                                    key={v}
                                     className="shadow-lg p-6 bg-red-400"
                                   >
                                     <p className="text-xs">{v}</p>
