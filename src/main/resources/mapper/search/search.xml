@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="toy.mapleStory.service.searchMapper">
+<!--    <select id="totalList" resultType="toy.mapleStory.vo.checkVO">-->
+<!--        SELECT IDX, NAME, CHK-->
+<!--        FROM STATE_CHECK-->
+<!--        ORDER BY IDX-->
+<!--    </select>-->
+
+    <select id="checkId" resultType="int" parameterType="String">
+        SELECT count(*)
+        FROM STATE_CHECK
+        WHERE name = #{ name }
+    </select>
+
+    <insert id="insertData" parameterType="toy.mapleStory.vo.checkVO">
+        INSERT INTO STATE_CHECK(IDX, NAME, UDATE, CHK)
+        VALUES(  ( SELECT count(idx) FROM STATE_CHECK )+1
+        , #{ name }
+        , (SELECT TO_CHAR(SYSDATE, 'YYYYMMDD') FROM DUAL)
+        , #{ chk }
+        )
+    </insert>
+
+    <update id="updateData" parameterType="toy.mapleStory.vo.checkVO">
+        UPDATE STATE_CHECK
+        SET CHK = #{ chk }
+        WHERE name = #{ name }
+    </update>
+
+</mapper>
+
