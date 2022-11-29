@@ -22,12 +22,10 @@ export default function CharCards() {
   const [getStorageMesoData, setStorageMesoData] = React.useState<string[]>([]);
 
   const searchApi = () => {
-    axios.all(chars.map((v) => axios.get(`${v.name}.json`)))
-    // axios.all(chars.map((v) => axios.get(`localhost8080/api/searchInfo/${v.name}`)))
+    // axios.all(chars.map((v) => axios.get(`${v.name}.json`)))
+    axios.all(chars.map((v) => axios.get(`localhost8080/api/searchInfo/${v.name}`)))
       .then((response) => {
         console.log("성공");
-        console.log("보낸아이디:" + chars.map((v) => v.name));
-        console.log(response);
         setGuildData(response.map((v) => v.data.guild));
         setJobData(response.map((v) => v.data.job));
         setLvData(response.map((v) => v.data.lv));
@@ -36,12 +34,10 @@ export default function CharCards() {
         console.log(error);
         console.log("실패");
       });
-    axios.all(chars.map((v) => axios.get(`${v.name}.json`)))
-    // axios.all(chars.map((v)=>axios.get(`localhost8080/api/searchDetailInfo/${v.name}`)))
+    // axios.all(chars.map((v) => axios.get(`${v.name}.json`)))
+    axios.all(chars.map((v)=>axios.get(`localhost8080/api/searchDetailInfo/${v.name}`)))
       .then((response) => {
         console.log("성공");
-        console.log("보낸아이디:" + chars.map((v) => v.name));
-        console.log(response);
         setMesoData(response.map((v) => v.data.mapleMoney));
         setEquipData(response.map((v) => v.data.equip));
         setUseData(response.map((v) => v.data.use));
