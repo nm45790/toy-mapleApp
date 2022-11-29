@@ -4,33 +4,22 @@ import Image from "next/image";
 import Manikin from "../../resource/마네킹.png";
 import axios from "axios";
 import React from "react";
-import { MdInventory } from "react-icons/Md";
-
-interface CharsInterface {
-  lv: number;
-  job: string;
-}
-
-type JonType = {
-  job: string;
-};
 
 export default function CharCards() {
   const [chars, setChars] = useRecoilState(inputCharState);
   const updatedChars = [...chars];
   const [showModal, setShowModal] = React.useState(false);
 
-  const [datas, setDatas] = React.useState([]);
-  const [guildData, setGuildData] = React.useState<string[]>([]);
-  const [mesoData, setMesoData] = React.useState<string[]>([]);
-  const [lvData, setLvData] = React.useState<number[]>([]);
-  const [jobData, setJobData] = React.useState<string[]>([]);
-  const [equipData, setEquipData] = React.useState<string[]>([]);
-  const [useData, setUseData] = React.useState<string[]>([]);
-  const [etcData, setEtcData] = React.useState<string[]>([]);
-  const [setupData, setSetupData] = React.useState<string[]>([]);
-  const [cashData, setCashData] = React.useState<string[]>([]);
-  const [storageMesoData, setStorageMesoData] = React.useState<string[]>([]);
+  const [getGuildData, setGuildData] = React.useState<string[]>([]);
+  const [getMesoData, setMesoData] = React.useState<string[]>([]);
+  const [getLvData, setLvData] = React.useState<number[]>([]);
+  const [getJobData, setJobData] = React.useState<string[]>([]);
+  const [getEquipData, setEquipData] = React.useState<string[]>([]);
+  const [getUseData, setUseData] = React.useState<string[]>([]);
+  const [getEtcData, setEtcData] = React.useState<string[]>([]);
+  const [getSetupData, setSetupData] = React.useState<string[]>([]);
+  const [getCashData, setCashData] = React.useState<string[]>([]);
+  const [getStorageMesoData, setStorageMesoData] = React.useState<string[]>([]);
 
   const searchApi = () => {
     axios.all(chars.map((v) => axios.get(`${v.name}.json`)))
@@ -80,14 +69,14 @@ export default function CharCards() {
             <p>총 캐릭터 개수 : {chars.length}</p>
             <p>
               모든 캐릭터 메소 합(창고제외) :
-              {mesoData
+              {getMesoData
                 .map((v) => +v.replaceAll(",", ""))
                 .reduce((arr: number, crr: number) => {
                   return arr + crr;
                 }, 0)}
               메소
             </p>
-            <p>창고 메소 : {storageMesoData}</p>
+            <p>창고 메소 : {getStorageMesoData}</p>
           </div>
           <div>
             <p>보유한 어쩌고 수 : </p>
@@ -163,7 +152,7 @@ export default function CharCards() {
                                 </div>
                                 {/*body*/}
                                 <div className="relative p-6 flex-auto grid lg:grid-cols-12 md:grid-cols-8 grid-cols-4 gap-4 overflow-auto max-h-[80vh]">
-                                  {Object.keys(equipData[i]).map((v) => (
+                                  {Object.keys(getEquipData[i]).map((v) => (
                                     <div
                                       key={v}
                                       className="shadow-lg p-6 bg-red-50"
@@ -171,7 +160,7 @@ export default function CharCards() {
                                       <p className="text-xs">{v}</p>
                                     </div>
                                   ))}
-                                  {Object.keys(useData[i]).map((v) => (
+                                  {Object.keys(getUseData[i]).map((v) => (
                                     <div
                                       key={v}
                                       className="shadow-lg p-6 bg-red-100"
@@ -179,7 +168,7 @@ export default function CharCards() {
                                       <p className="text-xs">{v}</p>
                                     </div>
                                   ))}
-                                  {Object.keys(etcData[i]).map((v) => (
+                                  {Object.keys(getEtcData[i]).map((v) => (
                                     <div
                                       key={v}
                                       className="shadow-lg p-6 bg-red-200"
@@ -187,7 +176,7 @@ export default function CharCards() {
                                       <p className="text-xs">{v}</p>
                                     </div>
                                   ))}
-                                  {Object.keys(setupData[i]).map((v) => (
+                                  {Object.keys(getSetupData[i]).map((v) => (
                                     <div
                                       key={v}
                                       className="shadow-lg p-6 bg-red-300"
@@ -195,7 +184,7 @@ export default function CharCards() {
                                       <p className="text-xs">{v}</p>
                                     </div>
                                   ))}
-                                  {Object.keys(cashData[i]).map((v) => (
+                                  {Object.keys(getCashData[i]).map((v) => (
                                     <div
                                       key={v}
                                       className="shadow-lg p-6 bg-red-400"
@@ -224,10 +213,10 @@ export default function CharCards() {
                     <p className="text-gray-700 text-base"> </p>
                     <Image src={Manikin} />
                     {/* 이미지 데이터 바꿔야함 */}
-                    <p>레벨 : {lvData[i]} </p>
-                    <p>직업 : {jobData[i]} </p>
-                    <p>길드 : {guildData[i]} </p>
-                    <p>보유메소 : {mesoData[i]}</p>
+                    <p>레벨 : {getLvData[i]} </p>
+                    <p>직업 : {getJobData[i]} </p>
+                    <p>길드 : {getGuildData[i]} </p>
+                    <p>보유메소 : {getMesoData[i]}</p>
                   </div>
                 </div>
               </div>
