@@ -11,9 +11,12 @@ export default function CharCards() {
   const [showModal, setShowModal] = React.useState(false);
 
   const [getGuildData, setGuildData] = React.useState<string[]>([]);
-  const [getMesoData, setMesoData] = React.useState<string[]>([]);
+  let guildArr:any[]=[]
   const [getLvData, setLvData] = React.useState<number[]>([]);
+  let lvArr:any[]=[]
   const [getJobData, setJobData] = React.useState<string[]>([]);
+  let jobArr:any[]=[]
+  const [getMesoData, setMesoData] = React.useState<string[]>([]);
   const [getEquipData, setEquipData] = React.useState<string[]>([]);
   const [getUseData, setUseData] = React.useState<string[]>([]);
   const [getEtcData, setEtcData] = React.useState<string[]>([]);
@@ -21,44 +24,51 @@ export default function CharCards() {
   const [getCashData, setCashData] = React.useState<string[]>([]);
   const [getStorageMesoData, setStorageMesoData] = React.useState<string[]>([]);
 
-  const searchApi = () => {
-    // axios.all(chars.map((v) => axios.get(`${v.name}.json`)))
-    axios.all(chars.map((v) => axios.get(`localhost8080/api/searchInfo/${v.name}`)))
+  const searchApi = (id:string) =>{
+    axios.get(`${id}.json`)
+    // axios.all(chars.map((v) => axios.get(`localhost8080/api/searchInfo/${v.name}`)))
       .then((response) => {
         console.log("성공");
-        setGuildData(response.map((v) => v.data.guild));
-        setJobData(response.map((v) => v.data.job));
-        setLvData(response.map((v) => v.data.lv));
+        guildArr.push(response.data.guild)
+        lvArr.push(response.data.lv)
+        jobArr.push(response.data.job)
+        setGuildData(v=>[...v,...guildArr])
+        setLvData(v=>[...v,...lvArr])
+        setJobData(v=>[...v,...jobArr])
+        // setGuildData(response.map((v) => v.data.guild));
+        // setJobData(response.map((v) => v.data.job));
+        // setLvData(response.map((v) => v.data.lv));
       })
       .catch((error) => {
         console.log(error);
         console.log("실패");
       });
-    // axios.all(chars.map((v) => axios.get(`${v.name}.json`)))
-    axios.all(chars.map((v)=>axios.get(`localhost8080/api/searchDetailInfo/${v.name}`)))
-      .then((response) => {
-        console.log("성공");
-        setMesoData(response.map((v) => v.data.mapleMoney));
-        setEquipData(response.map((v) => v.data.equip));
-        setUseData(response.map((v) => v.data.use));
-        setEtcData(response.map((v) => v.data.etc));
-        setSetupData(response.map((v) => v.data.setup));
-        setCashData(response.map((v) => v.data.cash));
-        setStorageMesoData(response.map((v) => v.data.storageMoney));
-      })
-      .catch((error) => {
-        console.log(error);
-        console.log("실패");
-      });
-  };
+    // axios.all(chars.map((v) => axios.get(`${id}.json`)))
+    // // axios.all(chars.map((v)=>axios.get(`localhost8080/api/searchDetailInfo/${v.name}`)))
+    //   .then((response) => {
+    //     console.log("성공");
+    //     setMesoData(response.map((v) => v.data.mapleMoney));
+    //     setEquipData(response.map((v) => v.data.equip));
+    //     setUseData(response.map((v) => v.data.use));
+    //     setEtcData(response.map((v) => v.data.etc));
+    //     setSetupData(response.map((v) => v.data.setup));
+    //     setCashData(response.map((v) => v.data.cash));
+    //     setStorageMesoData(response.map((v) => v.data.storageMoney));
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     console.log("실패");
+    //   });
+   ;
+  } 
   return (
     <>
-      <button
+      {/* <button
         onClick={searchApi}
         className="bg-color-3 hover:bg-color-4 text-color-2 font-bold py-2 px-4 rounded-full"
       >
         조회
-      </button>
+      </button> */}
       <div className="mt-2 p-4 border-2 border-color-4">
         <div className="p-2 border-2 border-color-4 sm:grid sm:grid-cols-2 grid grid-cols-1 ">
           <div>
@@ -87,7 +97,7 @@ export default function CharCards() {
               <div key={"charcards" + i} className="bg-slate-400 p-4">
                 <div>
                   <button
-                    onClick={() => {}}
+                    onClick={() => {searchApi(v.name)}}
                     className="bg-color-3 hover:bg-color-4 text-color-2 font-bold py-2 px-4 rounded-full"
                   >
                     검색
