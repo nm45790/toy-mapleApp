@@ -10,79 +10,45 @@ export default function CharCards() {
   const updatedChars = [...chars];
   const [showModal, setShowModal] = React.useState(false);
 
-  const [getGuildData, setGuildData] = React.useState<string[]>([]);
-  let guildArr:any[]=[]
-  const [getLvData, setLvData] = React.useState<number[]>([]);
-  let lvArr:any[]=[]
-  const [getJobData, setJobData] = React.useState<string[]>([]);
-  let jobArr:any[]=[]
-  const [getMesoData, setMesoData] = React.useState<string[]>([]);
-  const [getEquipData, setEquipData] = React.useState<string[]>([]);
-  const [getUseData, setUseData] = React.useState<string[]>([]);
-  const [getEtcData, setEtcData] = React.useState<string[]>([]);
-  const [getSetupData, setSetupData] = React.useState<string[]>([]);
-  const [getCashData, setCashData] = React.useState<string[]>([]);
-  const [getStorageMesoData, setStorageMesoData] = React.useState<string[]>([]);
-
+  const [data,setData] = React.useState<any[]>([]);
+  let dataArr:any[]=[]
+ 
   const searchApi = (id:string) =>{
     axios.get(`${id}.json`)
-    // axios.all(chars.map((v) => axios.get(`localhost8080/api/searchInfo/${v.name}`)))
       .then((response) => {
         console.log("성공");
-        guildArr.push(response.data.guild)
-        lvArr.push(response.data.lv)
-        jobArr.push(response.data.job)
-        setGuildData(v=>[...v,...guildArr])
-        setLvData(v=>[...v,...lvArr])
-        setJobData(v=>[...v,...jobArr])
-        // setGuildData(response.map((v) => v.data.guild));
-        // setJobData(response.map((v) => v.data.job));
-        // setLvData(response.map((v) => v.data.lv));
+        dataArr.push(response.data)
+        setData(v=>[...v,...dataArr])
+     
       })
       .catch((error) => {
         console.log(error);
         console.log("실패");
       });
-    // axios.all(chars.map((v) => axios.get(`${id}.json`)))
-    // // axios.all(chars.map((v)=>axios.get(`localhost8080/api/searchDetailInfo/${v.name}`)))
-    //   .then((response) => {
-    //     console.log("성공");
-    //     setMesoData(response.map((v) => v.data.mapleMoney));
-    //     setEquipData(response.map((v) => v.data.equip));
-    //     setUseData(response.map((v) => v.data.use));
-    //     setEtcData(response.map((v) => v.data.etc));
-    //     setSetupData(response.map((v) => v.data.setup));
-    //     setCashData(response.map((v) => v.data.cash));
-    //     setStorageMesoData(response.map((v) => v.data.storageMoney));
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     console.log("실패");
-    //   });
    ;
   } 
   return (
     <>
-      {/* <button
-        onClick={searchApi}
+      <button
+        onClick={()=>console.log(data)}
         className="bg-color-3 hover:bg-color-4 text-color-2 font-bold py-2 px-4 rounded-full"
       >
         조회
-      </button> */}
+      </button>
       <div className="mt-2 p-4 border-2 border-color-4">
         <div className="p-2 border-2 border-color-4 sm:grid sm:grid-cols-2 grid grid-cols-1 ">
           <div>
             <p>총 캐릭터 개수 : {chars.length}</p>
             <p>
               모든 캐릭터 메소 합(창고제외) :
-              {getMesoData
-                .map((v) => +v.replaceAll(",", ""))
+              {data
+                .map((v) => +v.mapleMoney.replaceAll(",", ""))
                 .reduce((arr: number, crr: number) => {
                   return arr + crr;
                 }, 0)}
               메소
             </p>
-            <p>창고 메소 : {getStorageMesoData}</p>
+            <p>창고 메소 : {data.map(v=>v.storageMoney)}</p>
           </div>
           <div>
             <p>보유한 어쩌고 수 : </p>
@@ -130,9 +96,6 @@ export default function CharCards() {
                   <div className="px-6 py-4">
                     <div className="font-bold text-xl mb-2 flex justify-between">
                       <p>{v.name}</p>
-                      {/* <button onClick={() => setShowModal(true)}>
-                      <MdInventory className="hover:fill-slate-500" />
-                    </button> */}
                       {showModal ? (
                         <>
                           <div
@@ -158,7 +121,7 @@ export default function CharCards() {
                                 </div>
                                 {/*body*/}
                                 <div className="relative p-6 flex-auto grid lg:grid-cols-12 md:grid-cols-8 grid-cols-4 gap-4 overflow-auto max-h-[80vh]">
-                                  {Object.keys(getEquipData[i]).map((v) => (
+                                  {Object.keys(data[i].equip).map((v) => (
                                     <div
                                       key={v}
                                       className="shadow-lg p-6 bg-red-50"
@@ -166,7 +129,7 @@ export default function CharCards() {
                                       <p className="text-xs">{v}</p>
                                     </div>
                                   ))}
-                                  {Object.keys(getUseData[i]).map((v) => (
+                                  {Object.keys(data[i].use).map((v) => (
                                     <div
                                       key={v}
                                       className="shadow-lg p-6 bg-red-100"
@@ -174,7 +137,7 @@ export default function CharCards() {
                                       <p className="text-xs">{v}</p>
                                     </div>
                                   ))}
-                                  {Object.keys(getEtcData[i]).map((v) => (
+                                  {Object.keys(data[i].etc).map((v) => (
                                     <div
                                       key={v}
                                       className="shadow-lg p-6 bg-red-200"
@@ -182,7 +145,7 @@ export default function CharCards() {
                                       <p className="text-xs">{v}</p>
                                     </div>
                                   ))}
-                                  {Object.keys(getSetupData[i]).map((v) => (
+                                  {Object.keys(data[i].setup).map((v) => (
                                     <div
                                       key={v}
                                       className="shadow-lg p-6 bg-red-300"
@@ -190,7 +153,7 @@ export default function CharCards() {
                                       <p className="text-xs">{v}</p>
                                     </div>
                                   ))}
-                                  {Object.keys(getCashData[i]).map((v) => (
+                                  {Object.keys(data[i].cash).map((v) => (
                                     <div
                                       key={v}
                                       className="shadow-lg p-6 bg-red-400"
@@ -219,10 +182,10 @@ export default function CharCards() {
                     <p className="text-gray-700 text-base"> </p>
                     <Image src={Manikin} />
                     {/* 이미지 데이터 바꿔야함 */}
-                    <p>레벨 : {getLvData[i]} </p>
-                    <p>직업 : {getJobData[i]} </p>
-                    <p>길드 : {getGuildData[i]} </p>
-                    <p>보유메소 : {getMesoData[i]}</p>
+                    <p>레벨 : {data[i]?data[i].lv:null} </p>
+                    <p>직업 : {data[i]?data[i].job:null} </p>
+                    <p>길드 : {data[i]?data[i].guild:null} </p>
+                    <p>보유메소 : {data[i]?data[i].mapleMoney:null}</p>
                   </div>
                 </div>
               </div>
