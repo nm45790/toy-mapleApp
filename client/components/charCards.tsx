@@ -4,8 +4,6 @@ import Image from "next/image";
 import Manikin from "../../resource/마네킹.png";
 import axios from "axios";
 import React from "react";
-import { Suspense } from "react";
-import fetchData from "./fetchData";
 
 export default function CharCards() {
   const [chars, setChars] = useRecoilState(inputCharState);
@@ -16,7 +14,7 @@ export default function CharCards() {
   const [data, setData] = React.useState<any[]>([]);
   let dataArr: any[] = [];
 
-  //진석 연구원님 작성 비동기 순서보장 코드
+  //비동기 순서보장 코드
   // const fetch = async (id: string) => {
   //   const response = await axios
   //     .get("http://localhost:8080/api/addQueue",{params:{id}})
