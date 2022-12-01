@@ -4,33 +4,85 @@ import Image from "next/image";
 import Manikin from "../../resource/마네킹.png";
 import axios from "axios";
 import React from "react";
+import { Suspense } from "react";
+import fetchData from "./fetchData";
 
 export default function CharCards() {
   const [chars, setChars] = useRecoilState(inputCharState);
   const updatedChars = [...chars];
   const [showModal, setShowModal] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
 
-  const [data,setData] = React.useState<any[]>([]);
-  let dataArr:any[]=[]
- 
-  const searchApi = (id:string) =>{
-    axios.get(`${id}.json`)
+  const [data, setData] = React.useState<any[]>([]);
+  let dataArr: any[] = [];
+
+  //진석 연구원님 작성 비동기 순서보장 코드
+  // const fetch = async (id: string) => {
+  //   const response = await axios
+  //     .get("http://localhost:8080/api/addQueue",{params:{id}})
+  //     return response.data
+  // }
+
+  // const searchApi = async (id: string) => {
+  //   const promiseArr = []
+  //   for (let i = 0; i < 10; i++) {
+  //     const data = new Promise(async (resolve, reject) => {
+  //       const res = await fetch(id + i)
+  //       if (res) {
+  //         resolve(res)
+  //       } else {
+  //         reject('')
+  //       }
+  //     })
+  //     promiseArr.push(data)
+  //   }
+  //   console.log((await Promise.all([...promiseArr])).toString())
+  //   return Promise.all([...promiseArr])
+  // };
+
+  
+  // 기존 api 호출
+  const searchDefaultApi = (id: string) => {
+    setIsLoading(true) 
+     axios
+      .get("http://localhost:8080/api/searchInfo",{params:{id}})
       .then((response) => {
-        console.log("성공");
-        dataArr.push(response.data)
-        setData(v=>[...v,...dataArr])
-     
+          console.log("성공");
+          console.log(response);
+        // dataArr.push(response.data);
+        // setData((v) => [...v, ...dataArr]);
       })
       .catch((error) => {
         console.log(error);
         console.log("실패");
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
-   ;
-  } 
+  };
+  const searchDetailApi = (id: string) => {
+    setIsLoading(true) 
+     axios
+      .get("http://localhost:8080/api/searchDetailInfo",{params:{id}})
+      .then((response) => {
+          console.log("성공");
+          console.log(response);
+        // dataArr.push(response.data);
+        // setData((v) => [...v, ...dataArr]);
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log("실패");
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
   return (
     <>
       <button
-        onClick={()=>console.log(data)}
+        onClick={() => console.log(data)}
         className="bg-color-3 hover:bg-color-4 text-color-2 font-bold py-2 px-4 rounded-full"
       >
         조회
@@ -48,7 +100,7 @@ export default function CharCards() {
                 }, 0)}
               메소
             </p>
-            <p>창고 메소 : {data.map(v=>v.storageMoney)}</p>
+            <p>창고 메소 : {data.map((v) => v.storageMoney)}</p>
           </div>
           <div>
             <p>보유한 어쩌고 수 : </p>
@@ -63,10 +115,20 @@ export default function CharCards() {
               <div key={"charcards" + i} className="bg-slate-400 p-4">
                 <div>
                   <button
-                    onClick={() => {searchApi(v.name)}}
+                    onClick={() => {
+                      searchDefaultApi(v.name);
+                    }}
                     className="bg-color-3 hover:bg-color-4 text-color-2 font-bold py-2 px-4 rounded-full"
                   >
-                    검색
+                    기본검색
+                  </button>
+                  <button
+                    onClick={() => {
+                      searchDetailApi(v.name);
+                    }}
+                    className="bg-color-3 hover:bg-color-4 text-color-2 font-bold py-2 px-4 rounded-full"
+                  >
+                    상세검색
                   </button>
                   <button
                     onClick={() => {
@@ -91,6 +153,7 @@ export default function CharCards() {
                   >
                     인벤
                   </button>
+                  
                 </div>
                 <div className="max-w-sm rounded overflow-hidden shadow-lg bg-color-3 mt-2 ">
                   <div className="px-6 py-4">
@@ -182,10 +245,10 @@ export default function CharCards() {
                     <p className="text-gray-700 text-base"> </p>
                     <Image src={Manikin} />
                     {/* 이미지 데이터 바꿔야함 */}
-                    <p>레벨 : {data[i]?data[i].lv:null} </p>
-                    <p>직업 : {data[i]?data[i].job:null} </p>
-                    <p>길드 : {data[i]?data[i].guild:null} </p>
-                    <p>보유메소 : {data[i]?data[i].mapleMoney:null}</p>
+                    <p>레벨 : {data[i] ? data[i].lv : null} </p>
+                    <p>직업 : {data[i] ? data[i].job : null} </p>
+                    <p>길드 : {data[i] ? data[i].guild : null} </p>
+                    <p>보유메소 : {data[i] ? data[i].mapleMoney : null}</p>
                   </div>
                 </div>
               </div>
