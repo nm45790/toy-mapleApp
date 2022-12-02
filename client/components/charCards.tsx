@@ -11,8 +11,10 @@ export default function CharCards() {
   const [showModal, setShowModal] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
 
-  const [data, setData] = React.useState<any[]>([]);
-  let dataArr: any[] = [];
+  const [defaultData, setDefaultData] = React.useState<any[]>([]);
+  let defaultDataArr: any[] = [];
+  const [detailData, setDetailData] = React.useState<any[]>([]);
+  let detailDataArr: any[] = [];
 
   //비동기 순서보장 코드
   // const fetch = async (id: string) => {
@@ -43,12 +45,13 @@ export default function CharCards() {
   const searchDefaultApi = (id: string) => {
     setIsLoading(true) 
      axios
-      .get("http://localhost:8080/api/searchInfo",{params:{id}})
+      // .get("http://localhost:8080/api/searchInfo",{params:{id}})
+      .get(`default${id}.json`)
       .then((response) => {
           console.log("성공");
           console.log(response);
-        // dataArr.push(response.data);
-        // setData((v) => [...v, ...dataArr]);
+          defaultDataArr.push(response.data);
+        setDefaultData((v) => [...v, ...defaultDataArr]);
       })
       .catch((error) => {
         console.log(error);
@@ -61,12 +64,13 @@ export default function CharCards() {
   const searchDetailApi = (id: string) => {
     setIsLoading(true) 
      axios
-      .get("http://localhost:8080/api/searchDetailInfo",{params:{id}})
+      // .get("http://localhost:8080/api/searchDetailInfo",{params:{id}})
+      .get(`detail${id}.json`)
       .then((response) => {
           console.log("성공");
           console.log(response);
-        // dataArr.push(response.data);
-        // setData((v) => [...v, ...dataArr]);
+        detailDataArr.push(response.data);
+        setDetailData((v) => [...v, ...detailDataArr]);
       })
       .catch((error) => {
         console.log(error);
@@ -80,31 +84,34 @@ export default function CharCards() {
   return (
     <>
       <button
-        onClick={() => console.log(data)}
+        onClick={() => console.log(defaultData)}
         className="bg-color-3 hover:bg-color-4 text-color-2 font-bold py-2 px-4 rounded-full"
       >
         조회
       </button>
       <div className="mt-2 p-4 border-2 border-color-4">
-        <div className="p-2 border-2 border-color-4 sm:grid sm:grid-cols-2 grid grid-cols-1 ">
+        <div className="p-2 border-2 border-color-4 sm:grid sm:grid-cols-2 lg:grid-cols-3  grid grid-cols-1 ">
           <div>
             <p>총 캐릭터 개수 : {chars.length}</p>
             <p>
               모든 캐릭터 메소 합(창고제외) :
-              {data
+              {defaultData
                 .map((v) => +v.mapleMoney.replaceAll(",", ""))
                 .reduce((arr: number, crr: number) => {
                   return arr + crr;
                 }, 0)}
               메소
             </p>
-            <p>창고 메소 : {data.map((v) => v.storageMoney)}</p>
+            <p>창고 메소 : {defaultData.map((v) => v.storageMoney)}</p>
           </div>
           <div>
             <p>보유한 어쩌고 수 : </p>
             <p>보유한 어쩌고 수 : </p>
             <p>보유한 어쩌고 수 : </p>
             <p>보유한 어쩌고 수 : </p>
+          </div>
+          <div className="border-2 border-color-4">
+            <p>인벤토리 검색 영역</p>
           </div>
         </div>
         <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4">
@@ -182,7 +189,7 @@ export default function CharCards() {
                                 </div>
                                 {/*body*/}
                                 <div className="relative p-6 flex-auto grid lg:grid-cols-12 md:grid-cols-8 grid-cols-4 gap-4 overflow-auto max-h-[80vh]">
-                                  {Object.keys(data[i].equip).map((v) => (
+                                  {Object.keys(detailData[i]).includes('equip')&&Object.keys(detailData[i].equip).map((v) => (
                                     <div
                                       key={v}
                                       className="shadow-lg p-6 bg-red-50"
@@ -190,7 +197,7 @@ export default function CharCards() {
                                       <p className="text-xs">{v}</p>
                                     </div>
                                   ))}
-                                  {Object.keys(data[i].use).map((v) => (
+                                  {Object.keys(detailData[i]).includes('use')&&Object.keys(detailData[i].use).map((v) => (
                                     <div
                                       key={v}
                                       className="shadow-lg p-6 bg-red-100"
@@ -198,7 +205,7 @@ export default function CharCards() {
                                       <p className="text-xs">{v}</p>
                                     </div>
                                   ))}
-                                  {Object.keys(data[i].etc).map((v) => (
+                                  {Object.keys(detailData[i]).includes('etc')&&Object.keys(detailData[i].etc).map((v) => (
                                     <div
                                       key={v}
                                       className="shadow-lg p-6 bg-red-200"
@@ -206,7 +213,7 @@ export default function CharCards() {
                                       <p className="text-xs">{v}</p>
                                     </div>
                                   ))}
-                                  {Object.keys(data[i].setup).map((v) => (
+                                  {Object.keys(detailData[i]).includes('setup')&& Object.keys(detailData[i].setup).map((v) => (
                                     <div
                                       key={v}
                                       className="shadow-lg p-6 bg-red-300"
@@ -214,7 +221,7 @@ export default function CharCards() {
                                       <p className="text-xs">{v}</p>
                                     </div>
                                   ))}
-                                  {Object.keys(data[i].cash).map((v) => (
+                                  {Object.keys(detailData[i]).includes('cash')&&Object.keys(detailData[i].cash).map((v) => (
                                     <div
                                       key={v}
                                       className="shadow-lg p-6 bg-red-400"
@@ -243,10 +250,10 @@ export default function CharCards() {
                     <p className="text-gray-700 text-base"> </p>
                     <Image src={Manikin} />
                     {/* 이미지 데이터 바꿔야함 */}
-                    <p>레벨 : {data[i] ? data[i].lv : null} </p>
-                    <p>직업 : {data[i] ? data[i].job : null} </p>
-                    <p>길드 : {data[i] ? data[i].guild : null} </p>
-                    <p>보유메소 : {data[i] ? data[i].mapleMoney : null}</p>
+                    <p>레벨 : {defaultData[i] ? defaultData[i].lv : null} </p>
+                    <p>직업 : {defaultData[i] ? defaultData[i].job : null} </p>
+                    <p>길드 : {defaultData[i] ? defaultData[i].guild : null} </p>
+                    <p>보유메소 : {defaultData[i] ? defaultData[i].mapleMoney : null}</p>
                   </div>
                 </div>
               </div>

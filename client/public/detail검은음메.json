@@ -1,5 +1,4 @@
 {
-  "img": "https://avatar.maplestory.nexon.com/Character/180/LIDMGHCFFLKLIILFIGLCHHKLOKAENLBCPJFKDIPPKIHKLLFLGDJPFJILJMAGFBHHEKMPFAMHIENNFDNCAPHIGOAAMDHDHNLLLPIPAJGBEJNJFIDAJECMAFNNPADKKOJNCHLHLKDCGGOMCBNPDAGIBDMBAIDJEODHEPPALNNIPMNBBJJPJMKJPDICDELGNBAHFECLJBBJLHCJJKCPDMDLEIFHEDKHJJGGNAENBHIPIPDJJPGOHBPJPOCOJKMFHPHO.png",
   "use": {
     "사골 뱀탕 (8개)": "https://avatar.maplestory.nexon.com/ItemIcon/KHPAJAHH.png",
     "시그너스의 소울 조각 (2개)": "https://avatar.maplestory.nexon.com/ItemIcon/KHLBKAPA.png",
@@ -32,11 +31,6 @@
     "만병통치약 (63개)": "https://avatar.maplestory.nexon.com/ItemIcon/KHPHLHOF.png",
     "파워 엘릭서 (40개)": "https://avatar.maplestory.nexon.com/ItemIcon/KHPCLHPI.png"
   },
-  "chk": "y",
-  "totalMoney": "0",
-  "mapleMoney": "717,905",
-  "lv": "209",
-  "guild": "-",
   "equip": {
     "악의의 계승자": "https://avatar.maplestory.nexon.com/ItemIcon/KEOGIFNA.png",
     "분노의 심판자": "https://avatar.maplestory.nexon.com/ItemIcon/KEOGIFMI.png",
@@ -82,12 +76,6 @@
     "페츌리 씨앗 오일 (7개)": "https://avatar.maplestory.nexon.com/ItemIcon/KBPAIHPG.png",
     "페츌리 꽃 오일 (9개)": "https://avatar.maplestory.nexon.com/ItemIcon/KBPAIHPJ.png"
   },
-  "name": "검은음메",
-  "setup": {},
-  "storageMoney": "-",
-  "job": "카인 / 카인 ",
-  "exp": "2,571,289,763",
-  "fame": "1",
   "cash": {
     "랜드터틀": "https://avatar.maplestory.nexon.com/ItemIcon/KAPCLOJF.png",
     "주인님 (쁘띠 웡키)": "https://avatar.maplestory.nexon.com/ItemIcon/KAPCJGPC.png"
