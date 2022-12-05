@@ -13,7 +13,6 @@ type IDetailInfo = {
 
 export default function InputIdForm() {
   const [chars, setChars] = useRecoilState(inputCharState);
-  let arr: IDetailInfo[] = [];
   const {
     register,
     handleSubmit,
@@ -22,12 +21,9 @@ export default function InputIdForm() {
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    arr.push(data);
-    // console.log(arr);
     setValue("name", "");
-    setChars((chars) => [...chars, ...arr]);
+    setChars((chars) => [...chars,data]);
   };
-  //   console.log(watch("name"));
   return (
     <>
       <div className="border-2 border-color-1 md:w-[768px] w-full p-4">

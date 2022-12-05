@@ -8,11 +8,9 @@ import React from "react";
 export default function CharCards() {
   const [chars, setChars] = useRecoilState(inputCharState);
   const updatedChars = [...chars];
-  const [showModal, setShowModal] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
 
   const [data, setData] = React.useState<any[]>([]);
-  let dataArr: any[] = [];
 
   // 기존 api 호출
   const searchApi = (id: string) => {
@@ -23,8 +21,7 @@ export default function CharCards() {
       .then((response) => {
         console.log("성공");
         console.log(response);
-        dataArr.push(response.data);
-        setData((v) => [...v, ...dataArr]);
+        setData((v) => [...v, response.data]);
       })
       .catch((error) => {
         console.log(error);
