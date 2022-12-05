@@ -10,7 +10,9 @@ const Home: NextPage = () => {
   return (
     <>
       <Seo title="Home" />
+      <div className="flex justify-center items-center">
       <InputIdForm />
+      </div>
       <CharCards/>
     </>
   );
