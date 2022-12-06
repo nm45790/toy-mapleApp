@@ -2,17 +2,15 @@ import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import { inputCharState } from "../state/inputCharState";
+import { loadingState } from "../state/loadingState";
 
 type Inputs = {
   name: string;
 };
 
-type IDetailInfo = {
-  name: string;
-};
-
 export default function InputIdForm() {
   const [chars, setChars] = useRecoilState(inputCharState);
+  const [isLoading, setIsLoading] = useRecoilState(loadingState);
   const {
     register,
     handleSubmit,
@@ -22,7 +20,11 @@ export default function InputIdForm() {
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     setValue("name", "");
-    setChars((chars) => [...chars,data]);
+    setChars((v) => [...v, data]);
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
   };
   return (
     <>
