@@ -27,9 +27,9 @@ const Home: NextPage = () => {
       <Seo title="Home" />
       <Loading/>
       <div className="flex justify-center items-center">
-        <InputIdForm fetchUserInfo={fetchUserInfo} />
+        <InputIdForm fetchUserInfo={fetchUserInfo} setUserData={setUserData} />
       </div>
-      <CharCards inputData={userData} />
+      <CharCards userData={userData} />
     </>
   );
 };

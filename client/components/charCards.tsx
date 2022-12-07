@@ -8,10 +8,10 @@ import { loadingState } from "../state/loadingState";
 import { DefaultUserInfoType } from "../types/charCardsType";
 
 interface Props {
-  inputData: DefaultUserInfoType[];
+  userData: DefaultUserInfoType[];
 }
 
-export default function CharCards({ inputData }: Props) {
+export default function CharCards({ userData }: Props) {
   const [chars, setChars] = useRecoilState(inputCharState);
   const updatedChars = [...chars];
 
@@ -40,13 +40,13 @@ export default function CharCards({ inputData }: Props) {
                       <Image src={Manikin} />
                       {/* 이미지 데이터 바꿔야함 */}
                       <p>서버 : </p>
-                      <p>인기도 : {inputData[i] ? inputData[i].chk : null}</p>
-                      <p>레벨 : {inputData[i] ? inputData[i].lv : null} </p>
-                      <p>직업 : {inputData[i] ? inputData[i].job : null} </p>
-                      <p>길드 : {inputData[i] ? inputData[i].guild : null} </p>
+                      <p>인기도 : {userData[i] ? userData[i].chk : null}</p>
+                      <p>레벨 : {userData[i] ? userData[i].lv : null} </p>
+                      <p>직업 : {userData[i] ? userData[i].job : null} </p>
+                      <p>길드 : {userData[i] ? userData[i].guild : null} </p>
                       <p>
                         보유메소 :
-                        {inputData[i] ? inputData[i].mapleMoney : null}
+                        {userData[i] ? userData[i].mapleMoney : null}
                       </p>
                       <p>스탯공격력 : </p>
                       <p>크뎀 : </p>

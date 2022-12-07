@@ -11,9 +11,10 @@ type Inputs = {
 
 interface Props {
   fetchUserInfo: (charId: string) => Promise<void>;
+  setUserData: Dispatch<SetStateAction<DefaultUserInfoType[]>>;
 }
 
-export default function InputIdForm({ fetchUserInfo }: Props) {
+export default function InputIdForm({ fetchUserInfo, setUserData }: Props) {
   const [chars, setChars] = useRecoilState(inputCharState);
   const [isLoading, setIsLoading] = useRecoilState(loadingState);
 
@@ -65,7 +66,10 @@ export default function InputIdForm({ fetchUserInfo }: Props) {
             />
           </form>
           <button
-            onClick={() => setChars([])}
+            onClick={() => {
+              setUserData([]);
+              setChars([]);
+            }}
             className="w-32 bg-slate-500 hover:bg-color-4 text-color-2 font-bold py-2 px-8 rounded-lg"
           >
             초기화
