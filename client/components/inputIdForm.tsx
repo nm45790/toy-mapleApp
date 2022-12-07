@@ -1,31 +1,39 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import { inputCharState } from "../state/inputCharState";
 import { loadingState } from "../state/loadingState";
+import { DefaultUserInfoType } from "../types/charCardsType";
 
 type Inputs = {
   name: string;
 };
 
-export default function InputIdForm() {
+interface Props {
+  fetchUserInfo: (charId: string) => Promise<void>;
+}
+
+export default function InputIdForm({ fetchUserInfo }: Props) {
   const [chars, setChars] = useRecoilState(inputCharState);
   const [isLoading, setIsLoading] = useRecoilState(loadingState);
+
   const {
     register,
     handleSubmit,
-    watch,
     setValue,
     formState: { errors },
   } = useForm<Inputs>();
+
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     setValue("name", "");
     setChars((v) => [...v, data]);
     setIsLoading(true);
-    setTimeout(() => {
+    setTimeout(async () => {
+      await fetchUserInfo(data.name);
       setIsLoading(false);
     }, 2000);
   };
+
   return (
     <>
       <div className="border-2 border-color-1 md:w-[768px] w-full p-4">
