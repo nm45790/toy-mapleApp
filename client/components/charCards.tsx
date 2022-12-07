@@ -25,7 +25,7 @@ export default function CharCards() {
         console.log("성공");
         console.log(response);
         setData((v) => [...v, response.data]);
-        response.data
+        response.data;
       })
       .catch((error) => {
         console.log(error);
@@ -41,7 +41,7 @@ export default function CharCards() {
       const response = await getUserInfo({ charId });
       if (response.status === 200) {
         console.log(response.data);
-        setData([...data, response.data])
+        setData([...data, response.data]);
       }
     } catch (err) {}
   };
