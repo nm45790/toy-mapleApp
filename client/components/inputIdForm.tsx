@@ -25,6 +25,7 @@ export default function InputIdForm({ fetchUserInfo }: Props) {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
+    setIsLoading(true);
     setValue("name", "");
     setChars((v) => [...v, data]);
     setIsLoading(true);

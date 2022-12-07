@@ -2,43 +2,18 @@ import { inputCharState } from "../state/inputCharState";
 import { useRecoilState } from "recoil";
 import Image from "next/image";
 import Manikin from "../../resource/마네킹.png";
-import axios from "axios";
-import React, { Dispatch, SetStateAction, useEffect } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import Loading from "./Loading";
 import { loadingState } from "../state/loadingState";
-import { getUserInfo } from "./fetchData";
 import { DefaultUserInfoType } from "../types/charCardsType";
 
 interface Props {
-  setInputData: Dispatch<SetStateAction<DefaultUserInfoType[]>>
-  fetchUserInfo: (charId: string) => Promise<void>
-  inputData: DefaultUserInfoType[]
+  inputData: DefaultUserInfoType[];
 }
 
-export default function CharCards({ setInputData, fetchUserInfo, inputData }: Props) {
+export default function CharCards({ inputData }: Props) {
   const [chars, setChars] = useRecoilState(inputCharState);
-  const [isLoading, setIsLoading] = useRecoilState(loadingState);
   const updatedChars = [...chars];
-
-  // // 기존 api 호출
-  // const searchApi = (id: string) => {
-  //   axios
-  //     // .get("http://localhost:8080/api/searchInfo",{params:{id}})
-  //     .get(`default${id}.json`)
-  //     .then((response) => {
-  //       console.log("성공");
-  //       console.log(response);
-  //       setInputData((v) => [...v, response.data]);
-  //       response.data;
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       console.log("실패");
-  //     })
-  //     .finally(() => {
-  //       setIsLoading(false);
-  //     });
-  // };
 
   return (
     <>
@@ -58,9 +33,6 @@ export default function CharCards({ setInputData, fetchUserInfo, inputData }: Pr
                 </button>
               </div>
               <div className="rounded overflow-hidden shadow-lg bg-color-3 mt-2 ">
-                {isLoading ? (
-                  <Loading name={chars[i].name} />
-                ) : (
                   <div className="px-6 py-4">
                     <div className="border-2">
                       <p className="font-bold text-xl mb-2">{v.name}</p>
@@ -72,7 +44,10 @@ export default function CharCards({ setInputData, fetchUserInfo, inputData }: Pr
                       <p>레벨 : {inputData[i] ? inputData[i].lv : null} </p>
                       <p>직업 : {inputData[i] ? inputData[i].job : null} </p>
                       <p>길드 : {inputData[i] ? inputData[i].guild : null} </p>
-                      <p>보유메소 :{inputData[i] ? inputData[i].mapleMoney : null}</p>
+                      <p>
+                        보유메소 :
+                        {inputData[i] ? inputData[i].mapleMoney : null}
+                      </p>
                       <p>스탯공격력 : </p>
                       <p>크뎀 : </p>
                       <p>보공 : </p>
@@ -85,7 +60,7 @@ export default function CharCards({ setInputData, fetchUserInfo, inputData }: Pr
                       <p>민 : </p>
                       <p>지 : </p>
                       <p>럭 : </p>
-                      <p>피 : </p>
+                      <p>HP : </p>
                     </div>
                     <div className="border-2">
                       <p>착용중인 아이템들(임시) : </p>
@@ -94,7 +69,6 @@ export default function CharCards({ setInputData, fetchUserInfo, inputData }: Pr
                       <p>착용중인 펫장비(임시) : </p>
                     </div>
                   </div>
-                )}
               </div>
             </div>
           ))}
