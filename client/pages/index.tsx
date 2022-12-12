@@ -3,12 +3,12 @@ import Seo from "../components/Seo";
 import InputIdForm from "../components/inputIdForm";
 import CharCards from "../components/charCards";
 import { useCallback, useState } from "react";
-import { DefaultUserInfoType } from "../types/charCardsType";
+import { UserInfoType } from "../types/charCardsType";
 import { getUserInfo } from "../components/fetchData";
 import Loading from "../components/Loading";
 
 const Home: NextPage = () => {
-  const [userData, setUserData] = useState<DefaultUserInfoType[]>([]);
+  const [userData, setUserData] = useState<UserInfoType[]>([]);
 
   const fetchUserInfo = useCallback(async (charId: string): Promise<void> => {
     try {

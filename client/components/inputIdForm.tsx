@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import { inputCharState } from "../state/inputCharState";
 import { loadingState } from "../state/loadingState";
-import { DefaultUserInfoType } from "../types/charCardsType";
+import { UserInfoType } from "../types/charCardsType";
 
 type Inputs = {
   name: string;
@@ -11,7 +11,7 @@ type Inputs = {
 
 interface Props {
   fetchUserInfo: (charId: string) => Promise<void>;
-  setUserData: Dispatch<SetStateAction<DefaultUserInfoType[]>>;
+  setUserData: Dispatch<SetStateAction<UserInfoType[]>>;
 }
 
 export default function InputIdForm({ fetchUserInfo, setUserData }: Props) {
@@ -53,12 +53,6 @@ export default function InputIdForm({ fetchUserInfo, setUserData }: Props) {
                 },
               })}
             />
-            {/* {errors.name?.type === "required" && (
-              <span>캐릭터 명을 입력 해주세요</span>
-            )}
-            {errors.name?.type === "minLength" && (
-              <span>{errors.name.message}</span>
-            )} */}
             <input
               className="w-32 bg-slate-500 hover:bg-color-4 text-color-2 font-bold py-2 px-8 rounded-lg"
               value="추가"
@@ -75,13 +69,6 @@ export default function InputIdForm({ fetchUserInfo, setUserData }: Props) {
             초기화
           </button>
         </div>
-        {/* <div className="mt-4 p-2 h-32 w-full border-solid border-2 border-color-4 rounded-lg">
-          {chars.length === 0 ? (
-            <p>캐릭터를 추가해주세요</p>
-          ) : (
-            chars.map((v, i) => <p key={"text" + i}>{v.name}</p>)
-          )}
-        </div> */}
       </div>
     </>
   );
