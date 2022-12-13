@@ -1,174 +1,174 @@
 {
-  "equipInfo": {
-    "1": {
+  "equipInfo": [
+    {
       "equipCategory": "장비분류 | 반지",
       "equipName": "어웨이크 링 (+3) ",
       "equipPotential": "(유니크 아이템)",
       "equipImg": "https://avatar.maplestory.nexon.com/ItemIcon/KEODPEPJ.png",
       "equipAdditionalPotential": "(레어 아이템)"
     },
-    "3": {
+    {
       "equipCategory": "장비분류 | 모자",
       "equipName": "앱솔랩스 메이지크라운 (+7)  17성 강화",
       "equipPotential": "(유니크 아이템)",
       "equipImg": "https://avatar.maplestory.nexon.com/ItemIcon/KEPCPDMC.png",
       "equipAdditionalPotential": "(에픽 아이템)"
     },
-    "5": {
+    {
       "equipCategory": "장비분류 | 엠블렘",
       "equipName": "골드 히어로즈 엠블렘 ",
       "equipPotential": "(레전드리 아이템)",
       "equipImg": "https://avatar.maplestory.nexon.com/ItemIcon/KEOLLCPI.png",
       "equipAdditionalPotential": "(유니크 아이템)"
     },
-    "6": {
+    {
       "equipCategory": "장비분류 | 반지",
       "equipName": "고귀한 이피아의 반지 (+3)  15성 강화",
       "equipPotential": "(레전드리 아이템)",
       "equipImg": "https://avatar.maplestory.nexon.com/ItemIcon/KEODIFGD.png",
       "equipAdditionalPotential": "(에픽 아이템)"
     },
-    "7": {
+    {
       "equipCategory": "장비분류 | 펜던트",
       "equipName": "매커네이터 펜던트 (+1)  11성 강화",
       "equipPotential": "(에픽 아이템)",
       "equipImg": "https://avatar.maplestory.nexon.com/ItemIcon/KEOAJFLF.png",
       "equipAdditionalPotential": "(레어 아이템)"
     },
-    "8": {
+    {
       "equipCategory": "장비분류 | 얼굴장식",
       "equipName": "응축된 힘의 결정석 (+6)  10성 강화",
       "equipPotential": "(에픽 아이템)",
       "equipImg": "https://avatar.maplestory.nexon.com/ItemIcon/KEPDJDJJ.png",
       "equipAdditionalPotential": "(레어 아이템)"
     },
-    "10": {
+    {
       "equipCategory": "장비분류 | 뱃지",
       "equipName": "크리스탈 웬투스 뱃지 ",
       "equipPotential": "해당 사항이 없습니다.",
       "equipImg": "https://avatar.maplestory.nexon.com/ItemIcon/KEOKJHGG.png",
       "equipAdditionalPotential": "해당 사항이 없습니다."
     },
-    "11": {
+    {
       "equipCategory": "장비분류 | 반지",
       "equipName": "테네브리스 원정대 반지 (+3) ",
       "equipPotential": "(유니크 아이템)",
       "equipImg": "https://avatar.maplestory.nexon.com/ItemIcon/KEODPEOG.png",
       "equipAdditionalPotential": "(레어 아이템)"
     },
-    "12": {
+    {
       "equipCategory": "장비분류 | 펜던트",
       "equipName": "도미네이터 펜던트 (+5)  15성 강화",
       "equipPotential": "(유니크 아이템)",
       "equipImg": "https://avatar.maplestory.nexon.com/ItemIcon/KEOAJEJF.png",
       "equipAdditionalPotential": "해당 사항이 없습니다."
     },
-    "13": {
+    {
       "equipCategory": "장비분류 | 눈장식",
       "equipName": "블랙빈 마크 (+6)  17성 강화",
       "equipPotential": "(유니크 아이템)",
       "equipImg": "https://avatar.maplestory.nexon.com/ItemIcon/KEPAJFND.png",
       "equipAdditionalPotential": "(레어 아이템)"
     },
-    "14": {
+    {
       "equipCategory": "장비분류 | 귀고리",
       "equipName": "데아 시두스 이어링 (+7)  17성 강화",
       "equipPotential": "(유니크 아이템)",
       "equipImg": "https://avatar.maplestory.nexon.com/ItemIcon/KEPBJFKA.png",
       "equipAdditionalPotential": "(레어 아이템)"
     },
-    "15": {
+    {
       "equipCategory": "장비분류 | 훈장",
       "equipName": "폴로의 친구 ",
       "equipPotential": "해당 사항이 없습니다.",
       "equipImg": "https://avatar.maplestory.nexon.com/ItemIcon/KEOGJFGC.png",
       "equipAdditionalPotential": "해당 사항이 없습니다."
     },
-    "16": {
+    {
       "equipCategory": "장비분류 | 반지",
       "equipName": "SS급 마스터 쥬얼링 ",
       "equipPotential": "(유니크 아이템)",
       "equipImg": "https://avatar.maplestory.nexon.com/ItemIcon/KEODIFNA.png",
       "equipAdditionalPotential": "(레어 아이템)"
     },
-    "17": {
+    {
       "equipCategory": "장비분류 | 완드 (한손무기)",
       "equipName": "화려한 스우의",
       "equipPotential": "(레전드리 아이템)",
       "equipImg": "https://avatar.maplestory.nexon.com/ItemIcon/KEMFJFMJ.png",
       "equipAdditionalPotential": "(유니크 아이템)"
     },
-    "18": {
+    {
       "equipCategory": "장비분류 | 상의",
       "equipName": "이글아이 던위치로브 (+7)  10성 강화",
       "equipPotential": "(에픽 아이템)",
       "equipImg": "https://avatar.maplestory.nexon.com/ItemIcon/KEPGJFLE.png",
       "equipAdditionalPotential": "(레어 아이템)"
     },
-    "19": {
+    {
       "equipCategory": "장비분류 | 어깨장식",
       "equipName": "앱솔랩스 메이지숄더 (+1)  10성 강화",
       "equipPotential": "(유니크 아이템)",
       "equipImg": "https://avatar.maplestory.nexon.com/ItemIcon/KEOHJGJH.png",
       "equipAdditionalPotential": "(레어 아이템)"
     },
-    "20": {
+    {
       "equipCategory": "장비분류 | 방패",
       "equipName": "데이모스 세이지 실드 (+8)  17성 강화",
       "equipPotential": "(레전드리 아이템)",
       "equipImg": "https://avatar.maplestory.nexon.com/ItemIcon/KEPLJHGI.png",
       "equipAdditionalPotential": "(유니크 아이템)"
     },
-    "21": {
+    {
       "equipCategory": "장비분류 | 포켓 아이템",
       "equipName": "핑크빛 성배 ",
       "equipPotential": "해당 사항이 없습니다.",
       "equipImg": "https://avatar.maplestory.nexon.com/ItemIcon/KEOEJHME.png",
       "equipAdditionalPotential": "해당 사항이 없습니다."
     },
-    "22": {
+    {
       "equipCategory": "장비분류 | 벨트",
       "equipName": "분노한 자쿰의 벨트 (+4)  17성 강화",
       "equipPotential": "(에픽 아이템)",
       "equipImg": "https://avatar.maplestory.nexon.com/ItemIcon/KEOBJFHH.png",
       "equipAdditionalPotential": "(레어 아이템)"
     },
-    "23": {
+    {
       "equipCategory": "장비분류 | 하의",
       "equipName": "트릭스터 던위치팬츠 (+7)  10성 강화",
       "equipPotential": "(에픽 아이템)",
       "equipImg": "https://avatar.maplestory.nexon.com/ItemIcon/KEPEJGIH.png",
       "equipAdditionalPotential": "(레어 아이템)"
     },
-    "24": {
+    {
       "equipCategory": "장비분류 | 장갑",
       "equipName": "앱솔랩스 메이지글러브 (+6)  12성 강화",
       "equipPotential": "(유니크 아이템)",
       "equipImg": "https://avatar.maplestory.nexon.com/ItemIcon/KEPKJBNG.png",
       "equipAdditionalPotential": "(에픽 아이템)"
     },
-    "25": {
+    {
       "equipCategory": "장비분류 | 망토",
       "equipName": "앱솔랩스 메이지케이프 (+6)  11성 강화",
       "equipPotential": "(유니크 아이템)",
       "equipImg": "https://avatar.maplestory.nexon.com/ItemIcon/KEOCJAHF.png",
       "equipAdditionalPotential": "(레어 아이템)"
     },
-    "28": {
+    {
       "equipCategory": "장비분류 | 신발",
       "equipName": "앱솔랩스 메이지슈즈 (+6)  10성 강화",
       "equipPotential": "(유니크 아이템)",
       "equipImg": "https://avatar.maplestory.nexon.com/ItemIcon/KEPFIHND.png",
       "equipAdditionalPotential": "(레어 아이템)"
     },
-    "30": {
+    {
       "equipCategory": "장비분류 | 기계 심장",
       "equipName": "페어리 하트 (+10)  8성 강화",
       "equipPotential": "(유니크 아이템)",
       "equipImg": "https://avatar.maplestory.nexon.com/ItemIcon/KEJFJHJC.png",
       "equipAdditionalPotential": "(레어 아이템)"
     }
-  },
+  ],
   "characterBasicInfo": {
     "defenseIgnore": "86%",
     "luk": "3,106",
@@ -181,14 +181,14 @@
     "hyperStat": "공격력과 마력 15 증가\n획득 경험치 8.0% 증가\n일반 몬스터 공격 시 데미지 35% 증가\n지력 120 증가\n크리티컬 확률 4% 증가\n크리티컬 데미지 10% 증가\n데미지 33% 증가\n보스 몬스터 공격 시 데미지 9% 증가\n",
     "starForce": "238",
     "defensePower": "11968",
-    "stat": "10,034,746 ~ 10,562,890",
+    "stat": "9,859,881 ~ 10,378,821",
     "famous": "363",
     "mp": "75,319",
     "int": "29,224",
     "str": "2226",
     "stateResistance": "40",
     "moveSpeed": "140%",
-    "money": "118,328,987",
+    "money": "175,326,987",
     "bossAttack": "253%",
     "jumpPower": "123%",
     "maplePoint": "1,550",
@@ -197,5 +197,9 @@
     "stance": "100%",
     "arcaneForce": "1190"
   },
-  "characterInfo": { "img": null, "level": "Lv.251", "name": "명회" }
+  "characterInfo": {
+    "img": "https://avatar.maplestory.nexon.com/Character/180/NEBCNBFBJMIAPHEMOJKKOHGEBBKPBFNIMEDGDEIKBDHJEOPPKMBAGFMOGGFGKPAAHFBNBFJFJNGMIKAOIDPAFNECMPAKOJGPABNEPDHODPJICACEKMPAFOCEMDINOIENNGEHNFEFBFEABOEAEPJAEMEKLJPIOPGDLDKLIMABELGKGGIOPMMOIJGAMBKECGNDPNMPGGDOMEPEBAEPADFEJJNHCPLEEBCDMGKBMANDJHIEMAOPJPKMGBPLAEGOGONO.png",
+    "level": "Lv.251",
+    "name": "명회"
+  }
 }

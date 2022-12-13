@@ -34,6 +34,14 @@ export default function CharCards({ userData }: Props) {
                 >
                   삭제
                 </button> */}
+                {/* <button
+                  onClick={() => {
+                    userData[i].equipInfo.map(v=>console.log(v))
+                  }}
+                  className="bg-color-3 hover:bg-color-4 text-color-2 font-bold py-2 px-4 rounded-full"
+                >
+                  테스트
+                </button> */}
               </div>
               <div className="rounded overflow-hidden shadow-lg bg-color-2 grid grid-cols-2">
                 <div className=" w-[100%] ">
@@ -45,10 +53,8 @@ export default function CharCards({ userData }: Props) {
                   <div className="  ">
                     {/* 기본 정보 컨테이너 */}
                     <div className="grid grid-cols-2">
+                      <p>스탯공격력 : </p>
                       <p>
-                        스탯공격력 : {" "}
-                        </p>
-                        <p>
                         {userData[i] && userData[i].characterBasicInfo.stat}{" "}
                       </p>
                       <p>
@@ -136,14 +142,16 @@ export default function CharCards({ userData }: Props) {
                     </div>
                   </div>
                   <h1>착용중인 아이템</h1>
-                  <div className="grid grid-cols-4   ">
-                    {testArr.map((v) => (
-                      <div key={v}>
-                        <Image
-                          width="48px"
-                          height="48px"
-                          src={ItemIcon}
-                        ></Image>
+                  <div className="grid grid-cols-4">
+                    {userData[i]&&userData[i].equipInfo.map((v, i) => (
+                      <div>
+                        <div key={i}>
+                          <Image
+                            width="48px"
+                            height="48px"
+                            src={ItemIcon}
+                          ></Image>
+                        </div>
                       </div>
                     ))}
                   </div>
