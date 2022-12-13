@@ -25,26 +25,27 @@ export default function InputIdForm({ fetchUserInfo, setUserData }: Props) {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setIsLoading(true);
     setValue("name", "");
     setChars((v) => [...v, data]);
     setIsLoading(true);
-    setTimeout(async () => {
-      await fetchUserInfo(data.name);
-      setIsLoading(false);
-    }, 2000);
+    await fetchUserInfo(data.name);
+    // setTimeout(async() => {
+    // await fetchUserInfo(data.name);
+    // setIsLoading(false);
+    // }, 2000);
   };
 
   return (
     <>
       <div className="border-2 border-color-1 md:w-[768px] w-full p-4">
-        <p>조회하고 싶은 캐릭터명을 기입 해주세요.</p>
+        {/* <p>조회하고 싶은 캐릭터명을 기입 해주세요.</p> */}
         <div className="gird items-center sm:flex">
           <form onSubmit={handleSubmit(onSubmit)} className="flex w-full">
             <input
-              className="w-full border-solid border-2 border-color-4 rounded-lg"
-              placeholder="Enter your ID"
+              className="w-full px-6 border-solid border-2 border-color-4 rounded-lg"
+              placeholder={"Enter your ID"}
               {...register("name", {
                 required: true,
                 minLength: {

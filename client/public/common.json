@@ -1,0 +1,25 @@
+{
+    "T_COMM_UPPER_CODE": [
+        {
+            "codeGrp": "RING",
+            "group_name": "반지종류"
+        }
+    ],
+    "T_COMM_LOWER_CODE": [
+        {
+            "codeGrpId": "RING",
+            "code": "RING_01",
+            "name": "커플링"
+        },
+        {
+            "codeGrpId": "RING",
+            "code": "RING_02",
+            "name": "다이아반지"
+        },
+        {
+            "codeGrpId": "RING",
+            "code": "RING_03",
+            "name": "사파이어반지"
+        }
+    ]
+}

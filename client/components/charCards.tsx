@@ -3,8 +3,9 @@ import { useRecoilState } from "recoil";
 import Image from "next/image";
 import Manikin from "../../resource/마네킹.png";
 import ItemIcon from "../../resource/ItemIcon.png";
-import React from "react";
+import React, { useMemo } from "react";
 import { UserInfoType } from "../types/charCardsType";
+import { loadingState } from "../state/loadingState";
 
 interface Props {
   userData: UserInfoType[];
@@ -12,16 +13,24 @@ interface Props {
 
 export default function CharCards({ userData }: Props) {
   const [chars, setChars] = useRecoilState(inputCharState);
-  const updatedChars = [...chars];
+  const [isLoading, setIsLoading] = useRecoilState(loadingState);
   const testArr = [
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
     21, 22, 23, 24, 25, 26, 27, 28, 29,
   ];
 
+  const updatedChars = [...chars];
+
+  const name = useMemo(() => getName(), [userData]);
+  function getName() {
+    return userData[0]?.equipInfo[0]?.equipName;
+  }
+
   return (
     <>
       <div className="mt-6 grid md:grid-cols-2 sm:grid-cols-1 gap-4">
         {chars &&
+          isLoading == false &&
           chars.map((v, i) => (
             <div key={"charcards" + i} className="bg-slate-800 p-4">
               <div>
@@ -34,20 +43,12 @@ export default function CharCards({ userData }: Props) {
                 >
                   삭제
                 </button> */}
-                {/* <button
-                  onClick={() => {
-                    userData[i].equipInfo.map(v=>console.log(v))
-                  }}
-                  className="bg-color-3 hover:bg-color-4 text-color-2 font-bold py-2 px-4 rounded-full"
-                >
-                  테스트
-                </button> */}
               </div>
               <div className="rounded overflow-hidden shadow-lg bg-color-2 grid grid-cols-2">
                 <div className=" w-[100%] ">
                   <div className="flex justify-center items-center">
                     <div className="w-[150px] h-[180px] bg-color-1 rounded-full flex justify-center items-center">
-                      <Image width="78px" height="128px" src={Manikin} />
+                      {userData[i]&&<Image width="78px" height="128px" src={userData[i].characterInfo.img} />}
                     </div>
                   </div>
                   <div className="  ">
@@ -142,18 +143,32 @@ export default function CharCards({ userData }: Props) {
                     </div>
                   </div>
                   <h1>착용중인 아이템</h1>
-                  <div className="grid grid-cols-4">
-                    {userData[i]&&userData[i].equipInfo.map((v, i) => (
-                      <div>
+                  <div className="grid grid-cols-5">
+                    {/* {testArr.map((v, index) => (
+                      <div
+                        key={index}
+                        className="bg-white w-[48px] h-[48px] m-1"
+                      ></div>
+                    ))} */}
+                    {userData[i] &&
+                      userData[i].equipInfo.map((v, i) => (
+                        // 장비창 순서
+                        // 반지" "모자" "엠블
+                        // 반지펜던얼장" "뱃지
+                        // 반지펜던눈장귀골훈장
+                        // 반지무기상의어깨보조
+                        // 포켓벨트하의장갑망토
+                        // " "" "신발안드심장
                         <div key={i}>
-                          <Image
-                            width="48px"
-                            height="48px"
-                            src={ItemIcon}
-                          ></Image>
+                          <div>
+                            <Image
+                              width="48px"
+                              height="48px"
+                              src={v.equipImg}
+                            ></Image>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
                   </div>
                 </div>
               </div>
