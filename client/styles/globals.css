@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: 'mapleLight';
+    src: url('../../resource/Maplestory\ Light.ttf');
+}
+@font-face {
+    font-family: 'mapleBold';
+    src: url('../../resource/Maplestory\ Bold.ttf');
+}
+
 html,
 body {
     background-color: #AEBDCA;

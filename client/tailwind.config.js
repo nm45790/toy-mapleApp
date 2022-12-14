@@ -6,6 +6,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily:{
+        'mapleLight' : ["mapleLight","-apple-system"],
+        'mapleBold' : ["mapleBold","-apple-system"]
+      },
       colors: {
         "color-1": "#F5EFE6",
         "color-2": "#E8DFCA",

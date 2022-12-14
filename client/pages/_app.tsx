@@ -6,7 +6,7 @@ import { RecoilRoot } from "recoil";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <div className="font-mapleLight">
       <RecoilRoot>
         <Head>
           <title>toyMapleApp</title>
@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </div>
         </Layout>
       </RecoilRoot>
-    </>
+    </div>
   );
 }
 

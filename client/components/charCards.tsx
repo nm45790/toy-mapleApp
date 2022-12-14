@@ -6,6 +6,8 @@ import ItemIcon from "../../resource/ItemIcon.png";
 import React, { useMemo } from "react";
 import { UserInfoType } from "../types/charCardsType";
 import { loadingState } from "../state/loadingState";
+import StatMordal from "./statMordal";
+import { mordalState } from "../state/mordalState";
 
 interface Props {
   userData: UserInfoType[];
@@ -14,6 +16,7 @@ interface Props {
 export default function CharCards({ userData }: Props) {
   const [chars, setChars] = useRecoilState(inputCharState);
   const [isLoading, setIsLoading] = useRecoilState(loadingState);
+  const [isMordal, setMordal] = useRecoilState(mordalState);
   const testArr = [
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
     21, 22, 23, 24, 25, 26, 27, 28, 29,
@@ -28,11 +31,12 @@ export default function CharCards({ userData }: Props) {
 
   return (
     <>
+      <StatMordal />
       <div className="mt-6 grid md:grid-cols-2 sm:grid-cols-1 gap-4">
         {chars &&
           isLoading == false &&
           chars.map((v, i) => (
-            <div key={"charcards" + i} className="bg-slate-800 p-4">
+            <div key={"charcards" + i} className="bg-slate-800 p-2">
               <div>
                 {/* <button
                   onClick={() => {
@@ -44,131 +48,48 @@ export default function CharCards({ userData }: Props) {
                   삭제
                 </button> */}
               </div>
-              <div className="rounded overflow-hidden shadow-lg bg-color-2 grid grid-cols-2">
-                <div className=" w-[100%] ">
-                  <div className="flex justify-center items-center">
-                    <div className="w-[150px] h-[180px] bg-color-1 rounded-full flex justify-center items-center">
-                      {userData[i]&&<Image width="78px" height="128px" src={userData[i].characterInfo.img} />}
+              <div className="rounded overflow-hidden shadow-lg bg-color-1 grid grid-cols-2 p-4">
+                <div className=" w-[100%]">
+                  <div className="w-full h-[180px] bg-color-4 flex justify-center items-center rounded-md">
+                    <div className="w-[100px] h-[150px] bg-color-2 flex justify-center items-center rounded-full">
+                      {userData[i] && (
+                        <Image width="78px" height="128px" src={Manikin} />
+                      )}
                     </div>
                   </div>
-                  <div className="  ">
-                    {/* 기본 정보 컨테이너 */}
-                    <div className="grid grid-cols-2">
-                      <p>스탯공격력 : </p>
-                      <p>
-                        {userData[i] && userData[i].characterBasicInfo.stat}{" "}
-                      </p>
-                      <p>
-                        크뎀 :{" "}
-                        {userData[i] &&
-                          userData[i].characterBasicInfo.criticalDamage}
-                      </p>
-                      <p>
-                        보공 :{" "}
-                        {userData[i] &&
-                          userData[i].characterBasicInfo.bossAttack}
-                      </p>
-                      <p>
-                        방무 :{" "}
-                        {userData[i] &&
-                          userData[i].characterBasicInfo.defenseIgnore}{" "}
-                      </p>
-                      <p>
-                        내성 :{" "}
-                        {userData[i] &&
-                          userData[i].characterBasicInfo.stateResistance}
-                      </p>
-                      <p>
-                        스타포스 :{" "}
-                        {userData[i] &&
-                          userData[i].characterBasicInfo.starForce}{" "}
-                      </p>
-                      <p>
-                        아케인포스 :{" "}
-                        {userData[i] &&
-                          userData[i].characterBasicInfo.arcaneForce}{" "}
-                      </p>
-                      <p>어센틱포스 : </p>
-                      <p>
-                        STR :{" "}
-                        {userData[i] && userData[i].characterBasicInfo.str}
-                      </p>
-                      <p>
-                        DEX :{" "}
-                        {userData[i] && userData[i].characterBasicInfo.dex}
-                      </p>
-                      <p>
-                        INT :{" "}
-                        {userData[i] && userData[i].characterBasicInfo.int}
-                      </p>
-                      <p>
-                        LUK :{" "}
-                        {userData[i] && userData[i].characterBasicInfo.luk}
-                      </p>
-                      <p>
-                        HP : {userData[i] && userData[i].characterBasicInfo.hp}
-                      </p>
-                    </div>
+                  <div className="h-[180px] flex justify-center items-center">
+                    <p className="font-mapleBold text-2xl">A++</p>
                   </div>
                 </div>
-                <div className="  ">
-                  <div className="flex justify-center items-center bg-color-1">
-                    <div>
-                      <p>
-                        이름 : {userData[i] && userData[i].characterInfo.name}
+                <div>
+                  <div className="h-[180px]  flex justify-center items-center bg-color-1">
+                    <div className="underline font-mapleLight text-2xl mt-4">
+                      <p className="mb-4">
+                        {userData[i] && userData[i].characterInfo.name} (
+                        {userData[i] && userData[i].characterBasicInfo.world})
                       </p>
-                      <p>
-                        서버 :{" "}
-                        {userData[i] && userData[i].characterBasicInfo.world}{" "}
+                      <p className="mb-4">
+                        {userData[i] && userData[i].characterInfo.level}(
+                        {userData[i] && userData[i].characterBasicInfo.job}){" "}
                       </p>
-                      <p>
+                      <p className="mb-4">
                         인기도 :{" "}
                         {userData[i] && userData[i].characterBasicInfo.famous}
                       </p>
-                      <p>
-                        레벨 : {userData[i] && userData[i].characterInfo.level}{" "}
-                      </p>
-                      <p>
-                        직업 :{" "}
-                        {userData[i] && userData[i].characterBasicInfo.job}{" "}
-                      </p>
-                      <p>
+                      <p className="mb-4">
                         길드 :{" "}
                         {userData[i] && userData[i].characterBasicInfo.guild}{" "}
                       </p>
-                      <p>
-                        보유메소 :
-                        {userData[i] && userData[i].characterBasicInfo.money}
-                      </p>
                     </div>
                   </div>
-                  <h1>착용중인 아이템</h1>
-                  <div className="grid grid-cols-5">
-                    {/* {testArr.map((v, index) => (
-                      <div
-                        key={index}
-                        className="bg-white w-[48px] h-[48px] m-1"
-                      ></div>
-                    ))} */}
-                    {userData[i] &&
-                      userData[i].equipInfo.map((v, i) => (
-                        // 장비창 순서
-                        // 반지" "모자" "엠블
-                        // 반지펜던얼장" "뱃지
-                        // 반지펜던눈장귀골훈장
-                        // 반지무기상의어깨보조
-                        // 포켓벨트하의장갑망토
-                        // " "" "신발안드심장
-                        <div key={i}>
-                          <div>
-                            <Image
-                              width="48px"
-                              height="48px"
-                              src={v.equipImg}
-                            ></Image>
-                          </div>
-                        </div>
-                      ))}
+                  <div className="flex justify-center items-center gap-10 px-10 h-[180px] ">
+                    <button className="bg-color-4 hover:bg-color-3 text-color-2 font-mapleBold py-4 px-8 rounded-lg"
+                    onClick={()=>setMordal(true)}>
+                      <p>정보</p>
+                    </button>
+                    <button className="bg-color-4 hover:bg-color-3 text-color-2 font-mapleBold py-4 px-8 rounded-lg">
+                      <p>갱신</p>
+                    </button>
                   </div>
                 </div>
               </div>
