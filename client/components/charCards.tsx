@@ -3,35 +3,27 @@ import { useRecoilState } from "recoil";
 import Image from "next/image";
 import Manikin from "../../resource/마네킹.png";
 import ItemIcon from "../../resource/ItemIcon.png";
-import React, { useMemo } from "react";
+import React, { Dispatch, SetStateAction, useMemo } from "react";
 import { UserInfoType } from "../types/charCardsType";
 import { loadingState } from "../state/loadingState";
 import StatMordal from "./statMordal";
-import { mordalState } from "../state/mordalState";
+import { indexState, mordalState } from "../state/mordalState";
 
 interface Props {
+  updateUserInfo: (charId: string) => Promise<void>;
   userData: UserInfoType[];
 }
 
-export default function CharCards({ userData }: Props) {
+export default function CharCards({ updateUserInfo, userData }: Props) {
   const [chars, setChars] = useRecoilState(inputCharState);
   const [isLoading, setIsLoading] = useRecoilState(loadingState);
   const [isMordal, setMordal] = useRecoilState(mordalState);
-  const testArr = [
-    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-    21, 22, 23, 24, 25, 26, 27, 28, 29,
-  ];
+  const [isIndex, setIndex] = useRecoilState(indexState);
 
   const updatedChars = [...chars];
 
-  const name = useMemo(() => getName(), [userData]);
-  function getName() {
-    return userData[0]?.equipInfo[0]?.equipName;
-  }
-
   return (
     <>
-      <StatMordal />
       <div className="mt-6 grid md:grid-cols-2 sm:grid-cols-1 gap-4">
         {chars &&
           isLoading == false &&
@@ -53,7 +45,12 @@ export default function CharCards({ userData }: Props) {
                   <div className="w-full h-[180px] bg-color-4 flex justify-center items-center rounded-md">
                     <div className="w-[100px] h-[150px] bg-color-2 flex justify-center items-center rounded-full">
                       {userData[i] && (
-                        <Image width="78px" height="128px" src={Manikin} />
+                        // <Image width="78px" height="128px" src={Manikin} />
+                        <Image
+                          width="78px"
+                          height="128px"
+                          src={userData[i].characterInfo.img}
+                        />
                       )}
                     </div>
                   </div>
@@ -83,12 +80,25 @@ export default function CharCards({ userData }: Props) {
                     </div>
                   </div>
                   <div className="flex justify-center items-center gap-10 px-10 h-[180px] ">
-                    <button className="bg-color-4 hover:bg-color-3 text-color-2 font-mapleBold py-4 px-8 rounded-lg"
-                    onClick={()=>setMordal(true)}>
-                      <p>정보</p>
+                    <button
+                      className="bg-color-4 hover:bg-color-3 text-color-2 font-mapleBold py-4 px-8 rounded-lg"
+                      onClick={() => {
+                        setMordal(true);
+                        setIndex(i);
+                      }}
+                    >
+                      <p className="w-8">정보</p>
                     </button>
-                    <button className="bg-color-4 hover:bg-color-3 text-color-2 font-mapleBold py-4 px-8 rounded-lg">
-                      <p>갱신</p>
+                    <button
+                      className="box-border bg-color-4 hover:bg-color-3 text-color-2 font-mapleBold py-4 px-8 rounded-lg"
+                      // onClick={async()=>{await fetchUserInfo(v.name).then((response)=>{
+
+                      // });}}>
+                      onClick={() => {
+                        console.log(userData[i], v.name);
+                      }}
+                    >
+                      <p className="w-8">갱신</p>
                     </button>
                   </div>
                 </div>

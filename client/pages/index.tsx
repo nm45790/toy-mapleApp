@@ -8,12 +8,26 @@ import { getUserInfo } from "../components/fetchData";
 import Loading from "../components/Loading";
 import { loadingState } from "../state/loadingState";
 import { useRecoilState } from "recoil";
+import StatMordal from "../components/statMordal";
 
 const Home: NextPage = () => {
   const [userData, setUserData] = useState<UserInfoType[]>([]);
   const [isLoading, setIsLoading] = useRecoilState(loadingState);
 
   const fetchUserInfo = useCallback(async (charId: string): Promise<void> => {
+    try {
+      const response = await getUserInfo({ charId });
+      if (response.status === 200) {
+        console.log(response.data);
+        setUserData((v) => [...v, response.data]);
+        setIsLoading(false);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
+
+  const updateUserInfo = useCallback(async (charId: string): Promise<void> => {
     try {
       const response = await getUserInfo({ charId });
       if (response.status === 200) {
@@ -33,7 +47,8 @@ const Home: NextPage = () => {
       <div className="flex justify-center items-center">
         <InputIdForm fetchUserInfo={fetchUserInfo} setUserData={setUserData} />
       </div>
-      <CharCards userData={userData} />
+      <CharCards userData={userData} updateUserInfo={updateUserInfo}  />
+      <StatMordal userData={userData}  />
     </>
   );
 };

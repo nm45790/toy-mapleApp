@@ -1,14 +1,16 @@
+import Image from "next/image";
 import React from "react";
 import { useRecoilState } from "recoil";
-import { mordalState } from "../state/mordalState";
+import { indexState, mordalState } from "../state/mordalState";
+import { UserInfoType } from "../types/charCardsType";
 
-export default function StatMordal() {
+type Props = {
+  userData: UserInfoType[];
+};
+
+export default function StatMordal({ userData }: Props) {
   const [isMordal, setMordal] = useRecoilState(mordalState);
-
-  const testArr = [
-    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-    21, 22, 23, 24, 25, 26, 27, 28, 29,
-  ];
+  const [isIndex, setIndex] = useRecoilState(indexState);
 
   return (
     <>
@@ -33,27 +35,74 @@ export default function StatMordal() {
                 {/*body*/}
                 <div className="grid sm:flex relative p-6 flex-auto ">
                   <div>
-                    <p>스탯공격력 : 112,345,687 ~ 113,456,128</p>
-                    <div className="grid md:grid-cols-2 grid-cols-2">
-                      <p>보스공격력 : </p>
-                      <p>방어무시 : </p>
-                      <p>크리티컬데미지 : </p>
-                      <p>스타포스 : </p>
-                      <p>STR : </p>
-                      <p>DEX : </p>
-                      <p>INT : </p>
-                      <p>LUK : </p>
-                      <p>HP : </p>
-                      <p>아케인포스 : </p>
+                    <p>
+                      스탯공격력 :{" "}
+                      {userData[isIndex] &&
+                        userData[isIndex].characterBasicInfo.stat}
+                    </p>
+                    <div className="grid md:grid-cols-4 grid-cols-2">
+                      <p>보스공격력</p>
+                      <p>
+                        {userData[isIndex] &&
+                          userData[isIndex].characterBasicInfo.bossAttack}
+                      </p>
+                      <p>방어무시</p>
+                      <p>
+                        {userData[isIndex] &&
+                          userData[isIndex].characterBasicInfo.defenseIgnore}
+                      </p>
+                      <p>크리티컬데미지</p>
+                      <p>
+                        {userData[isIndex] &&
+                          userData[isIndex].characterBasicInfo.criticalDamage}
+                      </p>
+                      <p>스타포스</p>
+                      <p>
+                        {userData[isIndex] &&
+                          userData[isIndex].characterBasicInfo.starForce}
+                      </p>
+                      <p>STR</p>
+                      <p>
+                        {userData[isIndex] &&
+                          userData[isIndex].characterBasicInfo.str}
+                      </p>
+                      <p>DEX</p>
+                      <p>
+                        {userData[isIndex] &&
+                          userData[isIndex].characterBasicInfo.dex}
+                      </p>
+                      <p>INT</p>
+                      <p>
+                        {userData[isIndex] &&
+                          userData[isIndex].characterBasicInfo.int}
+                      </p>
+                      <p>LUK</p>
+                      <p>
+                        {userData[isIndex] &&
+                          userData[isIndex].characterBasicInfo.luk}
+                      </p>
+                      <p>HP</p>
+                      <p>
+                        {userData[isIndex] &&
+                          userData[isIndex].characterBasicInfo.hp}
+                      </p>
+                      <p>아케인포스</p>
+                      <p>
+                        {userData[isIndex] &&
+                          userData[isIndex].characterBasicInfo.arcaneForce}
+                      </p>
                     </div>
                   </div>
                   <div className="relative p-6 flex-auto grid grid-cols-5">
-                    {testArr.map((v, i) => (
-                      <div
-                        key={i}
-                        className={"block bg-black w-[48px] h-[48px] m-1"}
-                      ></div>
-                    ))}
+                    {userData[isIndex] &&
+                      userData[isIndex].equipInfo.map((v, i) => (
+                        <div
+                          key={i}
+                          className={"block bg-black w-[48px] h-[48px] m-1"}
+                        >
+                            <Image width="48px" height="48px" src={v.equipImg}/>
+                        </div>
+                      ))}
                   </div>
                 </div>
                 {/*footer*/}
