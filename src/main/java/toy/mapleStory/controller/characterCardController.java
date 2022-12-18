@@ -50,12 +50,14 @@ public class characterCardController {
 
     @GetMapping("/api/getMapleBasicInfo")
     public String searchInfo(@RequestParam(value="id", required=false) String id) throws IOException, InterruptedException, ParseException {
-        System.out.println("idCheck : " + id);
+//        System.out.println("idCheck : " + id);
+        log.info("idCheck !!" + id);
         JSONObject j = new JSONObject();
 
-        int cnt = searchMapper.checkId(id);
-        System.out.println("idCheck");
-        System.out.println(id + " ---> " + cnt);
+//        int cnt = searchMapper.checkId(id);
+        int cnt = 1;
+//        System.out.println(id + " ---> " + cnt);
+        log.info(id + " ---> " + cnt);
 
         if (cnt == 1){
             String filePath = "data/"+id+".json";
@@ -97,7 +99,8 @@ public class characterCardController {
             searchMapper.updateData(checkVO);
         }
 
-        System.out.println(j);
+//        System.out.println(j);
+        log.info(j.toString());
 
         return j.toString();
     }
