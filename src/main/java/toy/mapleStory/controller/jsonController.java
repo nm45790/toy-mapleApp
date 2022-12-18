@@ -32,15 +32,50 @@ public class jsonController {
     searchMapper searchMapper;
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
+    private Queue q;
+    private int idx = 1;
 
     @GetMapping("/api/addQueue")
-    public String addQueue(@RequestParam(value = "id", required = false) String id) throws IOException, InterruptedException{
+    public String addQueue(@RequestParam(value = "id", required = false) String id) throws IOException, InterruptedException, ParseException {
+//    public String addQueue() throws IOException, InterruptedException{
+        JSONObject j = new JSONObject();
 
-        System.out.println(id);
-        Thread.sleep(3000);
+        if (idx==1){
+            String filePath = "data/명회.json";
+            Reader reader = new FileReader(filePath);
 
-        String newId = id+":";
-        return newId;
+            JSONParser parser = new JSONParser();
+            j = (JSONObject) parser.parse(reader);
+        }
+        else if (idx==2){
+            String filePath = "data/게이에요.json";
+            Reader reader = new FileReader(filePath);
+
+            JSONParser parser = new JSONParser();
+            j = (JSONObject) parser.parse(reader);
+        }
+        else if (idx==3){
+            String filePath = "data/떼찌야.json";
+            Reader reader = new FileReader(filePath);
+
+            JSONParser parser = new JSONParser();
+            j = (JSONObject) parser.parse(reader);
+        }
+        else if (idx==4){
+            String filePath = "data/츄워엉.json";
+            Reader reader = new FileReader(filePath);
+
+            JSONParser parser = new JSONParser();
+            j = (JSONObject) parser.parse(reader);
+            idx=0;
+        }
+
+        System.out.println("id :" + j);
+        String newId = "test : "+idx;
+        idx++;
+
+        return j.toString();
+//        return newId;
     }
 
     @GetMapping("/api/searchInfo")
