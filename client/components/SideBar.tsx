@@ -21,7 +21,7 @@ export default function SideBar() {
         </li>
         <Link href="/">
           <li className="relative">
-            <a
+            {/* <a
               className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out cursor-pointer"
               // href="/"
               data-mdb-ripple="true"
@@ -42,12 +42,12 @@ export default function SideBar() {
                 ></path>
               </svg>
               <span>Home</span>
-            </a>
+            </a> */}
           </li>
         </Link>
         <Link href="/dev">
           <li className="relative">
-            <a
+            {/* <a
               className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out cursor-pointer"
               href="/"
               data-mdb-ripple="true"
@@ -68,7 +68,7 @@ export default function SideBar() {
                 ></path>
               </svg>
               <span>Item</span>
-            </a>
+            </a> */}
           </li>
         </Link>
       </ul>

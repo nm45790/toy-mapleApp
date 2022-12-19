@@ -55,12 +55,12 @@ public class characterCardController {
         JSONObject j = new JSONObject();
 
 //        int cnt = searchMapper.checkId(id);
-        int cnt = 1;
+        int cnt = 0;
 //        System.out.println(id + " ---> " + cnt);
         log.info(id + " ---> " + cnt);
 
         if (cnt == 1){
-            String filePath = "data/"+id+".json";
+            String filePath = "/Users/iseongchan/toy-mapleapp/data/"+id+".json";
             Reader reader = new FileReader(filePath);
 
             JSONParser parser = new JSONParser();
@@ -72,7 +72,7 @@ public class characterCardController {
             checkVO checkVO = new checkVO();
             checkVO.setName(id);
             checkVO.setChk(1);
-            searchMapper.insertData(checkVO);
+            // searchMapper.insertData(checkVO);
 
             /**************************************************************************************************************
              채워지는 값
@@ -96,7 +96,7 @@ public class characterCardController {
 
             /* update id info -> chkState = 0 */
             checkVO.setChk(0);
-            searchMapper.updateData(checkVO);
+            // searchMapper.updateData(checkVO);
         }
 
 //        System.out.println(j);

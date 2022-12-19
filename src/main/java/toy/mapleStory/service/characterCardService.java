@@ -25,18 +25,18 @@ public class characterCardService implements characterCardServiceI{
 
     //Properties settings
     public static String WEB_DRIVER_ID = "webdriver.chrome.driver";
-    public static String WEB_DRIVER_PATH = "C:/Users/nerin/바탕 화면/myproject/2. Intelliji/toy-mapleApp/chromedriver/chromedriver.exe"; // 다운받은 크롬드라이버 경로
+    public static String WEB_DRIVER_PATH = "/Users/iseongchan/toy-mapleapp/chromedriver/chromedriver"; // 다운받은 크롬드라이버 경로
 
     //System Property SetUp
     public void settings() {
         System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
 
         ChromeOptions options = new ChromeOptions();
-//        options.setHeadless(true);
-//        options.addArguments("--lang=ko");
-//        options.addArguments("--no-sandbox");
-//        options.addArguments("--disable-dev-shm-usage");
-//        options.addArguments("--disable-gpu");
+       options.setHeadless(true);
+       options.addArguments("--lang=ko");
+       options.addArguments("--no-sandbox");
+       options.addArguments("--disable-dev-shm-usage");
+       options.addArguments("--disable-gpu");
 
         driver = new ChromeDriver(options);
 
@@ -273,7 +273,7 @@ public class characterCardService implements characterCardServiceI{
 
         try{
             System.out.println("check1");
-            String fileName = "data/"+name+".json";
+            String fileName = "/Users/iseongchan/toy-mapleapp/data/"+name+".json";
 
             File jf = new File(fileName);
             BufferedWriter writer = new BufferedWriter(new FileWriter(jf));
