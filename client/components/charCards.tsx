@@ -2,15 +2,15 @@ import { inputCharState } from "../state/inputCharState";
 import { useRecoilState } from "recoil";
 import Image from "next/image";
 import Manikin from "../../resource/마네킹.png";
-import ItemIcon from "../../resource/ItemIcon.png";
 import React, { Dispatch, SetStateAction, useMemo } from "react";
 import { UserInfoType } from "../types/charCardsType";
 import { loadingState } from "../state/loadingState";
 import StatMordal from "./statMordal";
 import { indexState, mordalState } from "../state/mordalState";
+import { UpdateUserType } from "../types/updateUserType";
 
 interface Props {
-  updateUserInfo: (charId: string) => Promise<void>;
+  updateUserInfo: (updateUser: UpdateUserType) => Promise<void>;
   userData: UserInfoType[];
 }
 
@@ -50,6 +50,7 @@ export default function CharCards({ updateUserInfo, userData }: Props) {
                           width="78px"
                           height="128px"
                           src={userData[i].characterInfo.img}
+                          // src={Manikin}
                         />
                       )}
                     </div>
@@ -91,15 +92,14 @@ export default function CharCards({ updateUserInfo, userData }: Props) {
                     </button>
                     <button
                       className="box-border bg-color-4 hover:bg-color-3 text-color-2 font-mapleBold py-4 px-8 rounded-lg"
-                      // onClick={async()=>{await fetchUserInfo(v.name).then((response)=>{
-
-                      // });}}>
-                      onClick={() => {
-                        console.log(userData[i], v.name);
-                      }}
-                    >
+                      onClick={async()=>{await updateUserInfo({ charId: v.name, index: i })}}>
                       <p className="w-8">갱신</p>
                     </button>
+                    {/* <button
+                      className="box-border bg-color-4 hover:bg-color-3 text-color-2 font-mapleBold py-4 px-8 rounded-lg"
+                      onClick={()=>console.log(userData)}>
+                      <p className="w-8">갱신</p>
+                    </button> */}
                   </div>
                 </div>
               </div>

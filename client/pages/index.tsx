@@ -9,16 +9,17 @@ import Loading from "../components/Loading";
 import { loadingState } from "../state/loadingState";
 import { useRecoilState } from "recoil";
 import StatMordal from "../components/statMordal";
+import { UpdateUserType } from "../types/updateUserType";
 
 const Home: NextPage = () => {
   const [userData, setUserData] = useState<UserInfoType[]>([]);
   const [isLoading, setIsLoading] = useRecoilState(loadingState);
+  let newArr = [...userData];
 
-  const fetchUserInfo = useCallback(async (charId: string): Promise<void> => {
+  const fetchUserInfo = useCallback(async (charId: string) => {
     try {
       const response = await getUserInfo({ charId });
       if (response.status === 200) {
-        console.log(response.data);
         setUserData((v) => [...v, response.data]);
         setIsLoading(false);
       }
@@ -27,18 +28,21 @@ const Home: NextPage = () => {
     }
   }, []);
 
-  const updateUserInfo = useCallback(async (charId: string): Promise<void> => {
-    try {
-      const response = await getUserInfo({ charId });
-      if (response.status === 200) {
-        console.log(response.data);
-        setUserData((v) => [...v, response.data]);
-        setIsLoading(false);
+  const updateUserInfo = useCallback(
+    async ({ charId, index }: UpdateUserType) => {
+      try {
+        const response = await getUserInfo({ charId });
+        if (response.status === 200) {
+          newArr[index] = response.data;
+          setUserData(newArr);
+          setIsLoading(false);
+        }
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
+    },
+    [newArr]
+  );
 
   return (
     <>
@@ -47,8 +51,8 @@ const Home: NextPage = () => {
       <div className="flex justify-center items-center">
         <InputIdForm fetchUserInfo={fetchUserInfo} setUserData={setUserData} />
       </div>
-      <CharCards userData={userData} updateUserInfo={updateUserInfo}  />
-      <StatMordal userData={userData}  />
+      <CharCards userData={userData} updateUserInfo={updateUserInfo} />
+      <StatMordal userData={userData} />
     </>
   );
 };
