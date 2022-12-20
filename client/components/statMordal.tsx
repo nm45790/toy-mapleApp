@@ -100,7 +100,7 @@ export default function StatMordal({ userData }: Props) {
                           key={i}
                           className={"block bg-black w-[48px] h-[48px] m-1"}
                         >
-                            <Image width="48px" height="48px" src={v.equipImg}/>
+                            {/* <Image width="48px" height="48px" src={v.equipImg}/> */}
                         </div>
                       ))}
                   </div>

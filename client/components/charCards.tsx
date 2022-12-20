@@ -5,16 +5,16 @@ import Manikin from "../../resource/마네킹.png";
 import React, { Dispatch, SetStateAction, useMemo } from "react";
 import { UserInfoType } from "../types/charCardsType";
 import { loadingState } from "../state/loadingState";
-import StatMordal from "./statMordal";
 import { indexState, mordalState } from "../state/mordalState";
 import { UpdateUserType } from "../types/updateUserType";
 
 interface Props {
   updateUserInfo: (updateUser: UpdateUserType) => Promise<void>;
   userData: UserInfoType[];
+  onRemoveData: (charId:string)=> void;
 }
 
-export default function CharCards({ updateUserInfo, userData }: Props) {
+export default function CharCards({ updateUserInfo, userData,onRemoveData }: Props) {
   const [chars, setChars] = useRecoilState(inputCharState);
   const [isLoading, setIsLoading] = useRecoilState(loadingState);
   const [isMordal, setMordal] = useRecoilState(mordalState);
@@ -30,27 +30,27 @@ export default function CharCards({ updateUserInfo, userData }: Props) {
           chars.map((v, i) => (
             <div key={"charcards" + i} className="bg-slate-800 p-2">
               <div>
-                {/* <button
+                <button
                   onClick={() => {
                     updatedChars.splice(updatedChars.indexOf(v), 1);
                     setChars(updatedChars);
+                    onRemoveData(v.name)
                   }}
                   className="bg-color-3 hover:bg-color-4 text-color-2 font-bold py-2 px-4 rounded-full"
                 >
                   삭제
-                </button> */}
+                </button>
               </div>
               <div className="rounded overflow-hidden shadow-lg bg-color-1 grid grid-cols-2 p-4">
                 <div className=" w-[100%]">
                   <div className="w-full h-[180px] bg-color-4 flex justify-center items-center rounded-md">
                     <div className="w-[100px] h-[150px] bg-color-2 flex justify-center items-center rounded-full">
                       {userData[i] && (
-                        // <Image width="78px" height="128px" src={Manikin} />
                         <Image
                           width="78px"
                           height="128px"
-                          src={userData[i].characterInfo.img}
-                          // src={Manikin}
+                          // src={userData[i].characterInfo.img}
+                          src={Manikin}
                         />
                       )}
                     </div>
@@ -95,11 +95,6 @@ export default function CharCards({ updateUserInfo, userData }: Props) {
                       onClick={async()=>{await updateUserInfo({ charId: v.name, index: i })}}>
                       <p className="w-8">갱신</p>
                     </button>
-                    {/* <button
-                      className="box-border bg-color-4 hover:bg-color-3 text-color-2 font-mapleBold py-4 px-8 rounded-lg"
-                      onClick={()=>console.log(userData)}>
-                      <p className="w-8">갱신</p>
-                    </button> */}
                   </div>
                 </div>
               </div>

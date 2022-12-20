@@ -44,6 +44,10 @@ const Home: NextPage = () => {
     [newArr]
   );
 
+  const onRemoveData = useCallback((charId: string) => {
+        setUserData(userData.filter((user)=> user.characterInfo.name !== charId));
+  }, [userData]);
+
   return (
     <>
       <Seo title="Home" />
@@ -51,7 +55,7 @@ const Home: NextPage = () => {
       <div className="flex justify-center items-center">
         <InputIdForm fetchUserInfo={fetchUserInfo} setUserData={setUserData} />
       </div>
-      <CharCards userData={userData} updateUserInfo={updateUserInfo} />
+      <CharCards userData={userData} updateUserInfo={updateUserInfo} onRemoveData={onRemoveData} />
       <StatMordal userData={userData} />
     </>
   );
