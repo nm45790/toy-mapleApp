@@ -56,11 +56,11 @@ export default function CharCards({
                       </div>
                     </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-2  ">
+                  <div className="grid grid-cols-2 gap-2 font-bold">
                     <div className="bg-ivory rounded-lg flex justify-center items-center">
                       <p>캐릭터명</p>
                     </div>
-                    <div className=" flex justify-center items-center">
+                    <div className=" flex justify-start items-start">
                       <p>
                         {userData[i] && userData[i].characterInfo.name} (
                         {userData[i] && userData[i].characterBasicInfo.world})
@@ -69,7 +69,7 @@ export default function CharCards({
                     <div className="bg-ivory rounded-lg flex justify-center items-center">
                       <p>Lv.</p>
                     </div>
-                    <div className=" flex justify-center items-center">
+                    <div className=" flex justify-start items-start">
                       <p>
                         {userData[i] &&
                           userData[i].characterInfo.level.replace("Lv.", "")}
@@ -79,15 +79,15 @@ export default function CharCards({
                     <div className="bg-ivory rounded-lg flex justify-center items-center">
                       <p>인기도</p>
                     </div>
-                    <div className=" flex justify-center items-center">
-                      <p className="flex justify-start items-start">
+                    <div className=" flex justify-start items-start">
+                      <p >
                         {userData[i] && userData[i].characterBasicInfo.famous}
                       </p>
                     </div>
                     <div className="bg-ivory rounded-lg flex justify-center items-center">
                       <p>길드</p>
                     </div>
-                    <div className=" flex justify-center items-center">
+                    <div className=" flex justify-start items-start">
                       <p>
                         {userData[i] && userData[i].characterBasicInfo.guild}
                       </p>
