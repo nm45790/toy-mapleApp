@@ -6,13 +6,13 @@ import { RecoilRoot } from "recoil";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div className="font-mapleLight">
+    <div className="font-NotoSans">
       <RecoilRoot>
         <Head>
           <title>toyMapleApp</title>
         </Head>
         <Layout>
-          <div className="bg-color-2 min-h-screen p-8 ">
+          <div className="bg-white min-h-screen p-8 ">
             <Component {...pageProps} />
           </div>
         </Layout>

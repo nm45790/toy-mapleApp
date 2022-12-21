@@ -3,6 +3,7 @@ import React from "react";
 import { useRecoilState } from "recoil";
 import { indexState, mordalState } from "../state/mordalState";
 import { UserInfoType } from "../types/charCardsType";
+import { motion } from "framer-motion";
 
 type Props = {
   userData: UserInfoType[];
@@ -16,7 +17,12 @@ export default function StatMordal({ userData }: Props) {
     <>
       {isMordal ? (
         <>
-          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+          >
             <div className="relative w-auto my-6 mx-auto max-w-4xl">
               {/*content*/}
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
@@ -100,7 +106,7 @@ export default function StatMordal({ userData }: Props) {
                           key={i}
                           className={"block bg-black w-[48px] h-[48px] m-1"}
                         >
-                            {/* <Image width="48px" height="48px" src={v.equipImg}/> */}
+                          {/* <Image width="48px" height="48px" src={v.equipImg}/> */}
                         </div>
                       ))}
                   </div>
@@ -117,8 +123,12 @@ export default function StatMordal({ userData }: Props) {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+          </motion.div>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.5 }}
+            transition={{ delay: 0.3 }}
+          className="fixed inset-0 z-40 bg-black"></motion.div>
         </>
       ) : null}
     </>

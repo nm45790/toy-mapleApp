@@ -8,13 +8,15 @@ module.exports = {
     extend: {
       fontFamily:{
         'mapleLight' : ["mapleLight","-apple-system"],
-        'mapleBold' : ["mapleBold","-apple-system"]
+        'mapleBold' : ["mapleBold","-apple-system"],
+        'NotoSans' : ["Noto Sans"]
       },
       colors: {
         "color-1": "#F5EFE6",
         "color-2": "#E8DFCA",
         "color-3": "#AEBDCA",
         "color-4": "#7895B2",
+        "ivory" : "#ECE6CC"
       },
       screens: {
         mobile: '481px',
