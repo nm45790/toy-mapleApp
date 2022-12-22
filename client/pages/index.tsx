@@ -18,7 +18,7 @@ const Home: NextPage = () => {
 
   const fetchUserInfo = useCallback(async (charId: string) => {
     try {
-      const response = await getUserInfo({ charId });
+      const response = await getUserInfo({ charId },"조회");
       if (response.status === 200) {
         setUserData((v) => [...v, response.data]);
         setIsLoading(false);
@@ -31,7 +31,7 @@ const Home: NextPage = () => {
   const updateUserInfo = useCallback(
     async ({ charId, index }: UpdateUserType) => {
       try {
-        const response = await getUserInfo({ charId });
+        const response = await getUserInfo({ charId },"갱신");
         if (response.status === 200) {
           newArr[index] = response.data;
           setUserData(newArr);
