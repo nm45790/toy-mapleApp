@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedWriter;
@@ -22,21 +24,27 @@ public class characterCardService implements characterCardServiceI{
     private WebDriver driver;
     // return json data
     private JSONObject j = new JSONObject();
-
-    //Properties settings
-    public static String WEB_DRIVER_ID = "webdriver.chrome.driver";
-    public static String WEB_DRIVER_PATH = "/Users/iseongchan/toy-mapleapp/chromedriver/chromedriver"; // 다운받은 크롬드라이버 경로
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     //System Property SetUp
     public void settings() {
-        System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
+        String WEB_DRIVER_ID = "webdriver.chrome.driver";
+        String WEB_DRIVER_PATH = System.getProperty("user.dir")+File.separator+"chromedriver"+File.separator+"chromedriver"; // 다운받은 크롬드라이버 경로
 
+        String w = System.getProperty("user.dir");
+
+        if (w.substring(0,1).equals("C")){ // 윈도우 맥 구분
+            WEB_DRIVER_PATH += ".exe";
+        }
+        log.info(WEB_DRIVER_PATH);
+
+        System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
         ChromeOptions options = new ChromeOptions();
-       options.setHeadless(true);
-       options.addArguments("--lang=ko");
-       options.addArguments("--no-sandbox");
-       options.addArguments("--disable-dev-shm-usage");
-       options.addArguments("--disable-gpu");
+//       options.setHeadless(true);
+//       options.addArguments("--lang=ko");
+//       options.addArguments("--no-sandbox");
+//       options.addArguments("--disable-dev-shm-usage");
+//       options.addArguments("--disable-gpu");
 
         driver = new ChromeDriver(options);
 
@@ -57,7 +65,6 @@ public class characterCardService implements characterCardServiceI{
         // search character list
         for (int x=0; x<cnt; x++){
             String tmp = driver.findElement(By.xpath("//*[@id=\"container\"]/div/div/div[3]/div[1]/table/tbody/tr["+(x+1)+"]/td[2]/dl/dt/a")).getText(); // character name
-//            System.out.println("compare name " + tmp + " ? "  + name + tmp.equals(name));
 
             // find character
             if (tmp.equals(name) == true){
@@ -104,7 +111,6 @@ public class characterCardService implements characterCardServiceI{
         for (int x=51; x<tmp.length; x++){
             // get hyperStat location
             if (tmp[x].equals("하이퍼스탯")){
-//                System.out.println("stop");
                 hyperStatCnt = x+1;
                 break;
             }
@@ -116,9 +122,6 @@ public class characterCardService implements characterCardServiceI{
         for (int y=hyperStatCnt; y<tmp.length; y++){
             hyperStat+=tmp[y]+"\n";
         }
-
-//        System.out.println("ability:"+ability);
-//        System.out.println("hyperstat:"+ hyperStat);
 
         // basic info setting -> json
         JSONObject basicInfo = new JSONObject();
@@ -156,17 +159,6 @@ public class characterCardService implements characterCardServiceI{
         String detailEquip = driver.findElement(By.xpath("//*[@id=\"container\"]/div[2]/div[1]/ul/li[3]/a")).getAttribute("href");
         // equip url -> user equip info
         callDetailEquip(detailEquip);
-
-//        String detailRank = driver.findElement(By.xpath("//*[@id=\"container\"]/div[2]/div[1]/ul/li[1]/a")).getAttribute("href");
-//        callDetailRank(detailRank);
-//        String detailPet = driver.findElement(By.xpath("//*[@id=\"container\"]/div[2]/div[1]/ul/li[10]/a")).getAttribute("href");
-//        callDetailPet(detailPet);
-//        Thread.sleep(1000);
-
-//        System.out.println("랭킹정보-->>"+driver.findElement(By.xpath("//*[@id=\"container\"]/div[2]/div[1]/ul/li[1]/a")).getAttribute("href"));
-//        System.out.println("장비정보-->>"+driver.findElement(By.xpath("//*[@id=\"container\"]/div[2]/div[1]/ul/li[3]/a")).getAttribute("href"));
-//        System.out.println("펫정보-->>"+driver.findElement(By.xpath("//*[@id=\"container\"]/div[2]/div[1]/ul/li[10]/a")).getAttribute("href"));
-//        Thread.sleep(3000);
     }
 
     // getUserInfo -> callDetailEquip
@@ -184,7 +176,7 @@ public class characterCardService implements characterCardServiceI{
 
             // 2, 4, 9, 26, 27, 29 -> this index isn't equip -> not check
             if ((x==2) || (x==4) || (x==9) || (x==26) || (x==27) || (x==29)){
-                System.out.println(x + ": not equip ... pass");
+                log.info(x + ": not equip ... pass");
             }
             // check other index
             else{
@@ -193,7 +185,7 @@ public class characterCardService implements characterCardServiceI{
 
                 // img src is blank -> not check
                 if (imgSize == 0) {
-                    System.out.println(x + ": src is blank ... pass");
+                    log.info(x + ": src is blank ... pass");
                 }
                 // this equip element(x) location click
                 else{
@@ -222,38 +214,37 @@ public class characterCardService implements characterCardServiceI{
                             .replace("검은 마법사의 군단장 아카이럼이 지녔다고 알려진 전설의 목걸이\n","")
                             .replace("메이플스토리 18주년 기념 훈장이다.\n","");
 
-                    System.out.println("----------");
-                    System.out.println("x: "+ x);
-                    System.out.println("img: "+ img);
+                    log.info("----------");
+                    log.info("x: "+ x);
+                    log.info("img: "+ img);
 
                     String[] infoSplit = equipElement.split("\n");
-                    System.out.println("장비이름:" + infoSplit[0]);
+                    log.info("장비이름:" + infoSplit[0]);
+
                     equip.put("equipName",infoSplit[0]);
                     equip.put("equipImg",img);
 
                     for(int y=0; y<infoSplit.length;y++){
                         if (infoSplit[y].contains("장비분류 |")){
-                            System.out.println(infoSplit[y]+"-"+infoSplit[y]);
+                            log.info(infoSplit[y]+"-"+infoSplit[y]);
                             equip.put("equipCategory",infoSplit[y]);
                             y=y+1;
                         }
                         else if (infoSplit[y].equals("잠재옵션")){
-                            System.out.println(infoSplit[y]+"-"+infoSplit[y+1]);
+                            log.info(infoSplit[y]+"-"+infoSplit[y+1]);
                             equip.put("equipPotential",infoSplit[y+1]);
                             y=y+1;
                         }
                         else if (infoSplit[y].equals("에디셔널 잠재옵션")){
-                            System.out.println(infoSplit[y]+"-"+infoSplit[y+1]);
+                            log.info(infoSplit[y]+"-"+infoSplit[y+1]);
                             equip.put("equipAdditionalPotential",infoSplit[y+1]);
                             y=y+1;
                         }
                     }
                     equip.put("equipNum", x);
-
                     e.add(equip);
 
-//                    equipInfo.put(x, equip); // index, equip
-                    System.out.println("----------");
+                    log.info("----------");
                 }
             }
         }
@@ -269,11 +260,10 @@ public class characterCardService implements characterCardServiceI{
     // json data save to excel
     @Override
     public void saveBinFile(String name, JSONObject j) throws IOException {
-        System.out.println("save bin file");
+        log.info("save bin file");
 
         try{
-            System.out.println("check1");
-            String fileName = "/Users/iseongchan/toy-mapleapp/data/"+name+".json";
+            String fileName = System.getProperty("user.dir")+File.separator+"data"+File.separator+name+".json";
 
             File jf = new File(fileName);
             BufferedWriter writer = new BufferedWriter(new FileWriter(jf));
@@ -286,6 +276,6 @@ public class characterCardService implements characterCardServiceI{
 
         }
 
-        System.out.println("파일 출력 완료!");
+        log.info("파일 출력 완료!");
     }
 }

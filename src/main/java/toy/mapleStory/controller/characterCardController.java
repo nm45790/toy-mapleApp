@@ -14,9 +14,7 @@ import toy.mapleStory.service.characterCardService;
 import toy.mapleStory.service.searchMapper;
 import toy.mapleStory.vo.checkVO;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 
 @CrossOrigin(origins="*", allowedHeaders="*") /* CORS 어노테이션 */
 @RestController
@@ -32,6 +30,24 @@ public class characterCardController {
     @GetMapping("/tmp")
     public void t(){
         log.info("info !!");
+    }
+
+    @GetMapping("/test")
+//    public void s(@RequestParam(value="id", required=false) String id) throws IOException, ParseException {
+    public void s() throws IOException, ParseException {
+        log.info("img !!");
+        JSONObject j = new JSONObject();
+
+        String w = System.getProperty("user.dir");
+        log.info(w);
+        log.info(w.substring(0,1));
+
+        if(w.substring(0,1).equals("C")){
+            log.info("크하하하");
+        }
+        else{
+            log.info("쿠후후후");
+        }
     }
 
     @GetMapping("/api/getJsonTest")
@@ -50,29 +66,25 @@ public class characterCardController {
 
     @GetMapping("/api/getMapleBasicInfo")
     public String searchInfo(@RequestParam(value="id", required=false) String id) throws IOException, InterruptedException, ParseException {
-//        System.out.println("idCheck : " + id);
         log.info("idCheck !!" + id);
         JSONObject j = new JSONObject();
 
-//        int cnt = searchMapper.checkId(id);
         int cnt = 0;
-//        System.out.println(id + " ---> " + cnt);
         log.info(id + " ---> " + cnt);
 
-        if (cnt == 1){
-            String filePath = "/Users/iseongchan/toy-mapleapp/data/"+id+".json";
+        String filePath = System.getProperty("user.dir")+File.separator+"data"+File.separator+id+".json";
+
+        File f = new File(filePath);
+        if(f.exists()){
+            log.info("o");
             Reader reader = new FileReader(filePath);
 
             JSONParser parser = new JSONParser();
             j = (JSONObject) parser.parse(reader);
         }
-        else if (cnt == 0) {
+        else{
+            log.info("x");
             characterCardService characterCardService = new characterCardService();
-
-            checkVO checkVO = new checkVO();
-            checkVO.setName(id);
-            checkVO.setChk(1);
-            // searchMapper.insertData(checkVO);
 
             /**************************************************************************************************************
              채워지는 값
@@ -94,12 +106,8 @@ public class characterCardController {
             characterCardService.saveBinFile(id, j);
             Thread.sleep(2000);
 
-            /* update id info -> chkState = 0 */
-            checkVO.setChk(0);
-            // searchMapper.updateData(checkVO);
         }
 
-//        System.out.println(j);
         log.info(j.toString());
 
         return j.toString();
