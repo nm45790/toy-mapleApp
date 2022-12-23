@@ -49,8 +49,8 @@ export default function CharCards({
                           <Image
                             width="78px"
                             height="128px"
-                            // src={userData[i].characterInfo.img}
-                            src={Manikin}
+                            src={userData[i].characterInfo.img}
+                            //src={Manikin}
                           />
                         )}
                       </div>
