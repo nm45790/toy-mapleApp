@@ -55,7 +55,7 @@ export default function InputIdForm({ fetchUserInfo, setUserData }: Props) {
               })}
             />
             <input
-              className="w-32 bg-sky-500 hover:bg-color-4 font-bold py-2 px-8 ml-4 rounded-lg"
+              className="w-32 bg-teal-500 hover:opacity-50 text-white font-bold py-2 px-8 ml-4 rounded-lg"
               value="추가"
               type="submit"
             />
@@ -65,7 +65,7 @@ export default function InputIdForm({ fetchUserInfo, setUserData }: Props) {
               setUserData([]);
               setChars([]);
             }}
-            className="w-32 bg-sky-500 hover:bg-color-4 ml-4 font-bold py-2 px-8 rounded-lg"
+            className="w-32 bg-teal-500 hover:opacity-50 text-white ml-4 font-bold py-2 px-8 rounded-lg"
           >
             초기화
           </button>

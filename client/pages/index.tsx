@@ -18,7 +18,7 @@ const Home: NextPage = () => {
 
   const fetchUserInfo = useCallback(async (charId: string) => {
     try {
-      const response = await getUserInfo({ charId },"조회");
+      const response = await getUserInfo({ charId }, "조회");
       if (response.status === 200) {
         setUserData((v) => [...v, response.data]);
         setIsLoading(false);
@@ -31,7 +31,7 @@ const Home: NextPage = () => {
   const updateUserInfo = useCallback(
     async ({ charId, index }: UpdateUserType) => {
       try {
-        const response = await getUserInfo({ charId },"갱신");
+        const response = await getUserInfo({ charId }, "갱신");
         if (response.status === 200) {
           newArr[index] = response.data;
           setUserData(newArr);
@@ -44,9 +44,14 @@ const Home: NextPage = () => {
     [newArr]
   );
 
-  const onRemoveData = useCallback((charId: string) => {
-        setUserData(userData.filter((user)=> user.characterInfo.name !== charId));
-  }, [userData]);
+  const onRemoveData = useCallback(
+    (charId: string) => {
+      setUserData(
+        userData.filter((user) => user.characterInfo.name !== charId)
+      );
+    },
+    [userData]
+  );
 
   return (
     <>
@@ -55,7 +60,11 @@ const Home: NextPage = () => {
       <div className="flex justify-center items-center">
         <InputIdForm fetchUserInfo={fetchUserInfo} setUserData={setUserData} />
       </div>
-      <CharCards userData={userData} updateUserInfo={updateUserInfo} onRemoveData={onRemoveData} />
+      <CharCards
+        userData={userData}
+        updateUserInfo={updateUserInfo}
+        onRemoveData={onRemoveData}
+      />
       <StatMordal userData={userData} />
     </>
   );
